@@ -1,0 +1,52 @@
+.score {
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 50px;
+    font-size: 20px;
+    width: 100%;
+    box-shadow: 0 7px 17px -4px rgb(0 0 0 / 8%);
+    border-radius: 15px;
+    // cursor: pointer;
+    margin-bottom: 10px;
+  }
+  &__text {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__answer {
+    transition: all ease 0.3s;
+    box-shadow: 0 7px 17px -4px rgb(0 0 0 / 8%);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  &__answerBlock {
+    padding: 15px;
+    border: 0px solid transparent;
+    border-radius: 15px;
+    font-size: 18px;
+    width: 100%;
+    display: inline-block;
+    box-shadow: 0 7px 17px -4px rgb(0 0 0 / 8%);
+    margin-bottom: 10px;
+  }
+  &__answerHide {
+    display: none;
+  }
+  &__answerCorrect {
+    border: 2px solid green;
+  }
+  &__answerNoCorrect {
+    border: 2px solid red;
+  }
+}
+.arrow {
+  cursor: pointer;
+}
+.arrowDrop {
+  transform: rotate(180deg);
+}

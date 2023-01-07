@@ -1,0 +1,30 @@
+.addNote {
+  &__questionsAnswer {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding-right: 20px;
+  }
+
+  &__answers {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  &__remove {
+    opacity: 0.7;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 475px) {
+  .addNote {
+    &__questionsAnswer {
+      font-size: 14px;
+    }
+  }
+}

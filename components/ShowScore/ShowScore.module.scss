@@ -1,0 +1,39 @@
+.score {
+  &__percent {
+    font-size: 70px;
+  }
+  &__progressbar {
+    flex: 0 0 20%;
+    margin: 60px auto;
+  }
+  &__statistics {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 740px) {
+  .score {
+    &__statistics {
+      justify-content: center;
+    }
+    &__progressbar {
+      flex: 0 0 30%;
+      margin: 20px auto 40px;
+    }
+  }
+}
+
+@media (max-width: 580px) {
+  .score {
+    &__statistics {
+      flex-direction: column;
+    }
+    &__progressbar {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+  }
+}

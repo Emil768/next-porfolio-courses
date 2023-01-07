@@ -1,0 +1,146 @@
+.addNote {
+  &__tests {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 0 0 80px;
+  }
+
+  &__questionBlock {
+    display: none;
+  }
+  &__questionActive {
+    display: block;
+    flex: 0 0 70%;
+  }
+
+  &__arrow {
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    background: red;
+    transition: all ease 0.3s;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 12px;
+    cursor: pointer;
+    svg {
+      display: block;
+    }
+
+    &:hover {
+      background-color: rgba(183, 206, 216, 0.6);
+    }
+  }
+
+  &__arrowHide {
+    opacity: 0;
+  }
+
+  &__left {
+    left: 0;
+    transform: rotate(90deg);
+  }
+  &__right {
+    right: 0;
+    transform: rotate(-90deg);
+  }
+
+  &__question {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 15px 40px rgb(30 35 66 / 5%);
+    padding: 15px;
+    border: 2px solid #f05f50;
+    border-radius: 5px;
+    margin: 20px 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__questionAdd {
+    font-size: 16px;
+
+    text-align: center;
+    background-color: #007bfe;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: all ease 0.1s;
+    color: #ffff;
+    cursor: pointer;
+    &:hover {
+      background-color: #4178b1;
+    }
+  }
+  &__questionTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  &__confirm {
+    font-size: 16px;
+
+    margin-left: 15px;
+    border: none;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: all ease 0.1s;
+    color: #ffff;
+    cursor: pointer;
+    background-color: #007bfe;
+    &:hover {
+      background-color: #4178b1;
+    }
+  }
+
+  &__answersAdd {
+    font-size: 14px;
+    color: #8b8b8b;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 675px) {
+  .addNote {
+    &__questionActive {
+      flex: 0 0 90%;
+    }
+    &__arrow {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+    &__left,
+    &__right {
+      svg {
+        width: 18px;
+      }
+    }
+    &__left {
+      left: -30px;
+      transform: rotate(90deg);
+    }
+    &__right {
+      right: -30px;
+      transform: rotate(-90deg);
+    }
+  }
+}
+@media (max-width: 375px) {
+  .addNote {
+    &__left,
+    &__right {
+      svg {
+        width: 15px;
+      }
+    }
+  }
+}

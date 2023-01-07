@@ -1,0 +1,13 @@
+.answer {
+  width: 100%;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #cccc;
+  padding-bottom: 10px;
+
+  &:focus {
+    border-color: #ad9e9ecc;
+  }
+}

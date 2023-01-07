@@ -1,0 +1,139 @@
+.programs {
+  &__title {
+    margin-bottom: 50px;
+  }
+
+  &__content {
+    position: relative;
+  }
+
+  &__contentInfo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+  }
+
+  &__block {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+    width: 67%;
+    margin-bottom: 40px;
+    z-index: 1;
+  }
+
+  &__block:nth-child(2n) {
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+  }
+
+  &__blockInfo {
+    z-index: 3;
+  }
+
+  &__blockNumber {
+    color: #525050;
+    font-size: 55px;
+    margin-right: 15px;
+
+    z-index: 3;
+  }
+
+  &__blockSlice {
+    position: absolute;
+    width: 300px;
+    left: -60px;
+    top: -40px;
+    z-index: 2;
+  }
+
+  &__blockTitle {
+    font-size: 35px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  &__blockText {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .imagePhone {
+    bottom: 84px;
+    right: 89px;
+    opacity: 0.5;
+  }
+  .imagePlayer {
+    left: 0px;
+    -webkit-transform: rotateZ(32deg);
+    -ms-transform: rotate(32deg);
+    transform: rotateZ(32deg);
+  }
+  .title {
+    font-size: 55px;
+    color: #525050;
+    z-index: 3;
+  }
+  .rotate {
+    width: 100px;
+    position: absolute;
+  }
+}
+
+@media (max-width: 990px) {
+  .programs {
+    &__blockTitle {
+      font-size: 30px;
+    }
+    &__blockText {
+      font-size: 18px;
+    }
+    .title {
+      font-size: 30px;
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .programs {
+    &__blockTitle {
+      font-size: 25px;
+    }
+    &__blockText {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 475px) {
+  .programs {
+    &__block {
+      align-self: flex-start;
+      width: 100%;
+    }
+    &__blockNumber {
+      font-size: 40px;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .programs {
+    &__blockTitle {
+      font-size: 20px;
+    }
+    &__blockText {
+      font-size: 14px;
+    }
+    &__blockNmber {
+      font-size: 35px;
+    }
+  }
+}

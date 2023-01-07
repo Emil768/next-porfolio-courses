@@ -1,0 +1,246 @@
+.note {
+  flex: 0 0 32%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    transition: all ease 0.3s;
+    -webkit-box-shadow: -1px 8px 26px -14px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: -1px 8px 26px -14px rgba(0, 0, 0, 0.13);
+    box-shadow: -1px 8px 26px -14px rgba(0, 0, 0, 0.13);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    background-color: #fff;
+    color: #000;
+    border: 0px solid #f4f3f3;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 30px;
+  }
+
+  &__bottom {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__reactions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 0 0 50%;
+    position: relative;
+  }
+
+  &__reactionBlock {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+  }
+
+  &__reaction {
+    margin-left: 8px;
+  }
+
+  &__reactionUsers {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__likeUser {
+    display: block;
+    width: 30px;
+    height: 30px;
+    top: -2px;
+
+    position: absolute;
+    z-index: 1;
+
+    &:first-of-type {
+      right: 70px;
+      z-index: 3;
+    }
+
+    &:nth-last-of-type(2) {
+      right: 50px;
+      z-index: 2;
+    }
+    &:last-of-type {
+      right: 30px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  &__likeIcon {
+    fill: #d83535;
+  }
+
+  &__unlikeIcon {
+    fill: #000;
+  }
+
+  &__link {
+    background-color: #fff;
+    padding: 15px 30px;
+    border-radius: 30px;
+    display: inline-block;
+    -webkit-transition: all ease 0.1s;
+    -o-transition: all ease 0.1s;
+    transition: all ease 0.1s;
+    -webkit-box-shadow: 0 4px 17px 0px rgb(0 0 0 /8%);
+    box-shadow: 0 4px 17px 0px rgb(0 0 0 /8%);
+    &:hover {
+      cursor: pointer;
+      -webkit-box-shadow: 0 4px 17px 0px rgb(0 0 0 /15%);
+      box-shadow: 0 4px 17px 0px rgb(0 0 0 /15%);
+    }
+  }
+
+  &__backgroundImage {
+    width: 100%;
+    height: 235px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  &__title {
+    line-height: 34px;
+    margin: 10px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  &__text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    line-height: 24px;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+
+    &__avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    &__name {
+      margin-left: 10px;
+    }
+  }
+}
+
+.circle {
+  display: inline-block;
+  margin-right: 10px;
+  height: 10px;
+  width: 10px;
+  border-radius: 30px;
+  background-color: #aebdc5;
+}
+
+//Responsive
+
+@media (max-width: 1155px) {
+  .note {
+    flex: 0 0 48%;
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+}
+
+@media (max-width: 775px) {
+  .note {
+    flex: 0 0 100%;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .note {
+    &__text {
+      font-size: 14px;
+    }
+    .author {
+      &__name {
+        font-size: 14px;
+      }
+    }
+    &__category {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 390px) {
+  .note {
+    &__title {
+      line-height: 30px;
+      font-size: 18px;
+      -webkit-line-clamp: 2;
+    }
+    &__text {
+      -webkit-line-clamp: 2;
+    }
+    .author {
+      &__name {
+        font-size: 12px;
+      }
+    }
+    &__category {
+      font-size: 12px;
+    }
+    &__reactions {
+      flex: 0 0 30%;
+    }
+  }
+}
+
+@media (max-width: 340px) {
+  .note {
+    &__link {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    &__reactions {
+      flex: 0 0 100%;
+      justify-content: space-between;
+    }
+  }
+}

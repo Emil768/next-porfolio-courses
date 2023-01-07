@@ -1,0 +1,34 @@
+@import "./font.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Proxima Nova Rg", Arial, Helvetica, sans-serif;
+  background-color: #f5dfff;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+input,
+button,
+textarea,
+a {
+  font-family: inherit;
+}

@@ -1,0 +1,142 @@
+.addNote {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 85%;
+    padding: 40px;
+    background: #ffffff;
+    box-shadow: 5px 15px 40px rgba(30, 35, 66, 0.15);
+    border-radius: 15px;
+
+    textarea {
+      outline: none;
+      width: 100%;
+
+      &:placeholder-shown:focus {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  &__top {
+    margin-bottom: 30px;
+  }
+
+  &__list {
+    display: flex;
+  }
+
+  &__item {
+    flex: 0 0 49%;
+    display: inline-block;
+    font-size: 20px;
+    color: #a49e9e;
+    text-align: center;
+    border-bottom: 2px solid #a49e9e;
+    padding-bottom: 30px;
+    margin-left: 20px;
+    cursor: pointer;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:hover {
+      color: #000;
+      border-bottom: 2px solid #000;
+    }
+  }
+  &__itemActive {
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
+    div,
+    button,
+    a {
+      font-size: 16px;
+
+      margin-left: 15px;
+      border: none;
+      outline: none;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px 20px;
+      transition: all ease 0.1s;
+      color: #ffff;
+      cursor: pointer;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__confirm {
+    background-color: #007bfe;
+    &:hover {
+      background-color: #4178b1;
+    }
+  }
+
+  &__cancel {
+    background-color: #dc3545;
+    &:hover {
+      background-color: #ae434d;
+    }
+  }
+}
+
+@media (max-width: 675px) {
+  .addNote {
+    &__content {
+      flex: 0 0 100%;
+    }
+  }
+}
+
+@media (max-width: 551px) {
+  .addNote {
+    &__buttons {
+      justify-content: flex-end;
+
+      button,
+      a {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 475px) {
+  .addNote {
+    &__content {
+      padding: 30px;
+    }
+    &__item {
+      font-size: 16px;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .addNote {
+    &__buttons {
+      button,
+      a {
+        width: 100%;
+        text-align: center;
+        margin: 0 auto 10px;
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

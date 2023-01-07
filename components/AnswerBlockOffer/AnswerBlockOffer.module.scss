@@ -1,0 +1,23 @@
+.answer {
+  &__field {
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 20px 20px 20px 40px;
+    border-radius: 30px;
+    font-size: 20px;
+
+    line-height: 1.5;
+    width: 100%;
+    display: inline-block;
+    box-shadow: 0 2px 13px 0 rgb(25 25 25 / 6%);
+    transition: all ease 0.1s;
+    cursor: pointer;
+    &:focus {
+      box-shadow: 0 2px 13px 0 rgb(25 25 25 / 10%);
+    }
+    &:placeholder-shown {
+      font-size: 16px;
+    }
+  }
+}

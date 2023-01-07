@@ -1,0 +1,126 @@
+.addNote {
+  &__text {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #c0c0c0;
+    transition: all ease 0.3s;
+    resize: none;
+    font-size: 18px;
+    padding: 10px 5px 20px;
+    margin-bottom: 60px;
+    &:focus {
+      border-bottom: 1px solid #ccc;
+    }
+  }
+
+  &__buttons {
+    align-self: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    div,
+    button,
+    a {
+      font-size: 16px;
+
+      margin-left: 15px;
+      border: none;
+      outline: none;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px 20px;
+      transition: all ease 0.1s;
+      color: #ffff;
+      cursor: pointer;
+    }
+  }
+}
+.inputField {
+  margin-bottom: 40px;
+  input,
+  textarea {
+    outline: none;
+    border: none;
+    width: 100%;
+
+    &:placeholder-shown:focus {
+      opacity: 0.7;
+    }
+  }
+  &__title {
+    font-size: 18px;
+    display: inline-block;
+    opacity: 0.9;
+    margin-bottom: 20px;
+  }
+
+  &__field {
+    font-size: 18px;
+    border-bottom: 1px solid #cccc;
+  }
+
+  &__file {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    &::-webkit-file-upload-button {
+      cursor: pointer;
+    }
+  }
+
+  &__category {
+    padding: 10px 5px;
+    font-size: 16px;
+
+    &:last-of-type {
+      margin-bottom: 40px;
+    }
+  }
+  &__button {
+    width: 100%;
+    outline: none;
+    border: none;
+    border: 1px solid #007bfe;
+    background-color: transparent;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    color: #007bfe;
+
+    cursor: pointer;
+  }
+  &__imageBlock {
+    position: relative;
+    max-width: 100%;
+    margin-bottom: 40px;
+  }
+  &__image {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 475px) {
+  .addNote {
+    &__text {
+      line-height: 1.5;
+    }
+  }
+  .inputField {
+    &__title {
+      font-size: 16px;
+    }
+    &__field {
+      font-size: 16px;
+    }
+    &__imageBlock {
+      margin-bottom: 20px;
+    }
+    &__image {
+      height: 200px;
+    }
+  }
+}

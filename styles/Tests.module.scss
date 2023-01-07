@@ -1,0 +1,38 @@
+.notes {
+  flex: 1 0 auto;
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__contentLoading {
+    justify-content: flex-end;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+
+  &__category {
+    color: rgb(174, 189, 197);
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+  }
+}
+
+.sorted__icon {
+  width: 15px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .notes {
+    &__top {
+      flex-direction: column;
+    }
+  }
+}

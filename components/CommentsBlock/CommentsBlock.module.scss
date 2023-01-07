@@ -1,0 +1,89 @@
+.comments {
+  &__block {
+    display: flex;
+    position: relative;
+    margin-bottom: 30px;
+  }
+  &__avatar {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 20px;
+    img {
+      border-radius: 50%;
+      max-width: 100%;
+      height: 100%;
+    }
+  }
+  &__info {
+    width: 100%;
+  }
+
+  &__communication {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  &__infoTop {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  &__name {
+    font-weight: 600;
+  }
+  &__date {
+    color: #77808c;
+  }
+  &__text {
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background-color: #efefef;
+    padding: 5px 5px 5px 10px;
+    line-height: 1.5;
+  }
+
+  &__textEdit {
+    border-color: #000;
+  }
+  &__reply {
+    display: flex;
+    align-items: center;
+
+    color: #77808c;
+    cursor: pointer;
+    svg {
+      fill: #77808c;
+      margin-right: 10px;
+    }
+    &:hover {
+      color: #4d4d4d;
+      svg {
+        fill: #4d4d4d;
+      }
+    }
+  }
+  &__panel {
+    display: flex;
+    align-items: center;
+  }
+
+  &__edit,
+  &__remove {
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 10px;
+
+    svg {
+      display: block;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(183, 206, 216, 0.6);
+    }
+  }
+}
