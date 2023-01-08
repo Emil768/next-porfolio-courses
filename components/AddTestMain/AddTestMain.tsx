@@ -4,8 +4,8 @@ import styles from "./AddTestMain.module.scss";
 import { AddTestContextType, CategoryOption } from "propTypes";
 import Select from "react-select";
 
-import { categoryOptions } from "@data";
-import axios from "@axios";
+import { categoryOptions } from "data";
+import axios from "axios";
 import { TestContext } from "pages/addTest";
 
 export const AddTestMain = () => {

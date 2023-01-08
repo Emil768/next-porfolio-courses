@@ -3,8 +3,8 @@ import { Popup } from "components";
 import { useState } from "react";
 import styles from "./SortPopup.module.scss";
 
-import { useAppDispatch } from "@redux/hooks";
-import { fetchSortBy } from "@redux/slices";
+import { useAppDispatch } from "redux/hooks";
+import { fetchSortBy } from "redux/slices";
 
 export const SortPopup = () => {
   const dispatch = useAppDispatch();

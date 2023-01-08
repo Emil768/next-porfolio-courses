@@ -1,6 +1,6 @@
 import styles from "./ScoreBlock.module.scss";
 import { ArrowIcon } from "public/icons";
-import { QuesProps } from "@proptypes";
+import { QuesProps } from "propTypes";
 import { useState } from "react";
 
 interface ScoreBlockProps extends QuesProps {

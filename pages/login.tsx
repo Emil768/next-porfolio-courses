@@ -1,7 +1,7 @@
 import { EmailIcon, FolderIcon } from "public/icons";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { fetchAuth } from "@redux/slices";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { fetchAuth } from "redux/slices";
 import { LoginProps } from "propTypes";
 import { useRouter } from "next/router";
 import Link from "next/link";

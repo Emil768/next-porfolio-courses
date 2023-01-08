@@ -1,19 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer } from "./slices/auth/auth";
-import { quizReducer } from "./slices/quiz/quiz";
-import { testsReducer } from "./slices/tests/tests";
+import { quizReducer, authReducer, testsReducer } from "./slices";
 
-export const store = configureStore({
-  reducer: {
-    tests: testsReducer,
-    quiz: quizReducer,
-    auth: authReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-});
+import { createWrapper } from "next-redux-wrapper";
 
-export type RootState = ReturnType<typeof store.getState>;
+const makeStore = () =>
+  configureStore({
+    reducer: {
+      tests: testsReducer,
+      quiz: quizReducer,
+      auth: authReducer,
+    },
+    devTools: true,
+  });
+
+export const store = makeStore();
+
+export type RootStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<RootStore["getState"]>;
 export type AppDispatch = typeof store.dispatch;
+export const wrapper = createWrapper<RootStore>(makeStore);

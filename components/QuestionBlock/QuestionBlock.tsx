@@ -1,12 +1,12 @@
 import { useContext, useRef } from "react";
 
-import { AddTestContextType, QuesLessProps } from "@proptypes";
-import { AnswerInfo, AnswerOfferInfo } from "@components";
+import { AddTestContextType, QuesLessProps } from "propTypes";
+import { AnswerInfo, AnswerOfferInfo } from "components";
 
 import styles from "./QuestionBlock.module.scss";
 import { RemoveIcon } from "public/icons";
 
-import axios from "@axios";
+import axios from "axios";
 import ReactSwitch from "react-switch";
 import { TestContext } from "pages/addTest";
 

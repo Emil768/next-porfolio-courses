@@ -1,8 +1,8 @@
 import styles from "./LikesSwitch.module.scss";
 
-import { TestProps, UserProps } from "@proptypes";
+import { TestProps, UserProps } from "propTypes";
 
-import { options } from "@data";
+import { options } from "data";
 import Link from "next/link";
 
 interface LikesSwitchProps {

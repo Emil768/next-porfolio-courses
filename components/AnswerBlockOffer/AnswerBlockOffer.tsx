@@ -1,5 +1,5 @@
 import styles from "./AnswerBlockOffer.module.scss";
-import { onGetCurrentAnswer } from "@redux/slices";
+import { onGetCurrentAnswer } from "redux/slices";
 import { useDispatch } from "react-redux";
 import debounce from "lodash.debounce";
 

@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { UserProps } from "propTypes";
-import { fethAuthRegister } from "@redux/slices";
+import { fethAuthRegister } from "redux/slices";
 import { ClipLoader } from "react-spinners";
 
 import styles from "../styles/Registration.module.scss";
 
 import { EmailIcon, FolderIcon, UserIcon, ImageIcon } from "public/icons";
 
-import axios from "@axios";
+import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 

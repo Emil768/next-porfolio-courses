@@ -1,7 +1,7 @@
 import styles from "./InfoPanel.module.scss";
 
-import { options } from "@data";
-import { TestProps } from "@proptypes";
+import { options } from "data";
+import { TestProps } from "propTypes";
 import Link from "next/link";
 
 export const InfoPanel = ({

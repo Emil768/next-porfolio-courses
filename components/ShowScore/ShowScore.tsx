@@ -1,6 +1,6 @@
 import styles from "./ShowScore.module.scss";
 
-import { useAppSelector } from "@redux/hooks";
+import { useAppSelector } from "redux/hooks";
 
 import { ResultList, ProgressProvider, ScoreBlock } from "components";
 import { CircularProgressbar } from "react-circular-progressbar";

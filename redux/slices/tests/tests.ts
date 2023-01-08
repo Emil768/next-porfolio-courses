@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
 import { TestProps } from "propTypes";
 import { TestState } from "./types";
@@ -65,6 +66,7 @@ const testSlice = createSlice({
   name: "tests",
   initialState,
   reducers: {},
+
   extraReducers: (builder) => {
     builder
 

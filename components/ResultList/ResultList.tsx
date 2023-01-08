@@ -1,4 +1,4 @@
-import { useAppSelector } from "@redux/hooks";
+import { useAppSelector } from "redux/hooks";
 import { testResult } from "utils";
 import styles from "./ResultList.module.scss";
 

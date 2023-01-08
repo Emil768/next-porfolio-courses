@@ -3,8 +3,8 @@ import { useRef } from "react";
 import styles from "./Comments.module.scss";
 
 import { TestProps } from "propTypes";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { fetchAddComment } from "@redux/slices";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { fetchAddComment } from "redux/slices";
 import { CommentsBlock } from "components";
 import Link from "next/link";
 

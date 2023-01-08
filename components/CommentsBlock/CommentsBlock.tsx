@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-import { CommentProps } from "@proptypes";
+import { CommentProps } from "propTypes";
 import styles from "./CommentsBlock.module.scss";
 
 import { EditIcon, RemoveIcon, ReplyIcon, SuccessIcon } from "public/icons";
-import { fetchRemoveComment, fetchUpdateComment } from "@redux/slices";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { fetchRemoveComment, fetchUpdateComment } from "redux/slices";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import ContentEditable from "react-contenteditable";
 import Link from "next/link";
 

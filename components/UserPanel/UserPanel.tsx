@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./UserPanel.module.scss";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { logout } from "@redux/slices";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { logout } from "redux/slices";
 
 import { PopupItems } from "propTypes";
 import { Popup } from "components";

@@ -3,8 +3,8 @@ import styles from "./Test.module.scss";
 
 import { LikeIcon, UnlikeIcon } from "public/icons";
 
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { fetchAddLike, fetchRemoveLike } from "@redux/slices";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { fetchAddLike, fetchRemoveLike } from "redux/slices";
 import Link from "next/link";
 
 export const Test = ({

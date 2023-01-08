@@ -1,4 +1,4 @@
-import { QuesProps, TestProps } from "@proptypes";
+import { QuesProps, TestProps } from "propTypes";
 
 export const testResult = (quiz: TestProps) =>
   quiz?.ques.reduce(

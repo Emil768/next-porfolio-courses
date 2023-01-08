@@ -4,7 +4,7 @@ import styles from "../styles/AddTest.module.scss";
 
 import { AddTestContextType, MainAddTestProps, TestProps } from "propTypes";
 
-import { useAppSelector } from "@redux/hooks";
+import { useAppSelector } from "redux/hooks";
 import { AddTestMain, AddTestQuestion } from "components";
 
 import axios from "axios";

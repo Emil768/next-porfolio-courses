@@ -3,10 +3,12 @@ import styles from "styles/Tests.module.scss";
 
 import { Test, Categories, SortPopup, EmptyBlock } from "components";
 
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { fetchCategory, fetchTests } from "@redux/slices";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { fetchCategory, fetchTests } from "redux/slices";
 import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/router";
+import { GetServerSideProps } from "next/types";
+import { wrapper } from "redux/store";
 
 const Tests = () => {
   const { tests, status } = useAppSelector((state) => state.tests);
@@ -66,3 +68,11 @@ const Tests = () => {
 };
 
 export default Tests;
+
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    console.log(store);
+    return {
+      props: {},
+    };
+  });
