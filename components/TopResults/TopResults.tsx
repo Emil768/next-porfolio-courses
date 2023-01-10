@@ -4,6 +4,7 @@ import styles from "./TopResults.module.scss";
 // import { Link, useParams } from "react-router-dom";
 import { ScoreProps } from "propTypes";
 import Link from "next/link";
+import { GetStaticProps } from "next";
 
 export const TopResults = () => {
   // const { id } = useParams();

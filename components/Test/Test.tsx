@@ -17,9 +17,9 @@ export const Test = ({
   backgroundImage,
 }: TestProps) => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector((state) => state.auth);
+  // const { data } = useAppSelector((state) => state.auth);
 
-  const checkTestId = likes.find((item) => item.likeBy._id === data?._id);
+  // const checkTestId = likes.find((item) => item.likeBy._id === data?._id);
 
   const onLikeTest = async () => dispatch(fetchAddLike(_id));
   const onUnlikeTest = async () => dispatch(fetchRemoveLike(_id));
@@ -56,7 +56,7 @@ export const Test = ({
             Пройти тест
           </Link>
 
-          {data ? (
+          {/* {data ? (
             <div className={styles.note__reactions}>
               <div className={styles.note__reactionUsers}>
                 {likes.slice(-3).map((item) => (
@@ -84,7 +84,7 @@ export const Test = ({
                 </div>
               )}
             </div>
-          ) : null}
+          ) : null} */}
         </div>
       </div>
     </div>

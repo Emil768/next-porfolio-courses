@@ -1,18 +1,18 @@
-import { AllUserActionProps, TestProps, UserProps } from "@proptypes";
+import { AllUserActionProps, TestProps, UserProps } from "propTypes";
 import styles from "./UserInfo.module.scss";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { DateIcon, EmailIcon } from "public/icons";
 
-import axios from "@axios";
-import { options } from "@data";
+import axios from "utils/axios";
+import { options } from "data";
 import {
   CommentSwitch,
   LikesSwitch,
   PublishSwitch,
   TestSwitch,
-} from "@components";
+} from "components";
 
 import { ClipLoader } from "react-spinners";
 
@@ -28,6 +28,7 @@ export const UserInfo = () => {
 
   const getUserData = (): UserProps =>
     axios.get(`/auth/me/${id}`).then(({ data }: { data: UserProps }) => data);
+
   const getUserCategory = (): TestProps[] =>
     axios
       .get(`/getActionsUser/${id}`)

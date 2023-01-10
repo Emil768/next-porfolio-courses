@@ -7,8 +7,8 @@ const makeStore = () =>
   configureStore({
     reducer: {
       tests: testsReducer,
-      quiz: quizReducer,
-      auth: authReducer,
+      // quiz: quizReducer,
+      // auth: authReducer,
     },
     devTools: true,
   });
