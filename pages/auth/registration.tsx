@@ -5,7 +5,7 @@ import { UserProps } from "propTypes";
 import { fethAuthRegister } from "redux/slices";
 import { ClipLoader } from "react-spinners";
 
-import styles from "../styles/Registration.module.scss";
+import styles from "styles/Registration.module.scss";
 
 import { EmailIcon, FolderIcon, UserIcon, ImageIcon } from "public/icons";
 
@@ -14,10 +14,10 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 const Registration = () => {
-  const dispatch = useAppDispatch();
-  const { data, status } = useAppSelector((state) => state.auth);
+  // const dispatch = useAppDispatch();
+  // const { data, status } = useAppSelector((state) => state.auth);
 
-  const isLoading = Boolean(status === "loading");
+  // const isLoading = Boolean(status === "loading");
 
   const router = useRouter();
 
@@ -36,51 +36,51 @@ const Registration = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async ({ fullName, email, password, avatarUrl }: any) => {
-    try {
-      const formData = new FormData();
-      formData.append("picture", avatarUrl[0]);
+  // const onSubmit = async ({ fullName, email, password, avatarUrl }: any) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("picture", avatarUrl[0]);
 
-      const newAvatarUrl = await axios.post("/uploads", formData);
-      const { secure_url, public_id } = newAvatarUrl.data;
+  //     const newAvatarUrl = await axios.post("/uploads", formData);
+  //     const { secure_url, public_id } = newAvatarUrl.data;
 
-      const fields: UserProps = {
-        fullName,
-        email,
-        password,
-        avatarUrl: {
-          public_id: public_id,
-          url: secure_url,
-        },
-      };
+  //     const fields: UserProps = {
+  //       fullName,
+  //       email,
+  //       password,
+  //       avatarUrl: {
+  //         public_id: public_id,
+  //         url: secure_url,
+  //       },
+  //     };
 
-      const user = await dispatch(fethAuthRegister(fields));
+  //     const user = await dispatch(fethAuthRegister(fields));
 
-      if (!user.payload) {
-        return window.alert("Не удалось зарегистрироваться!");
-      }
-      if ("token" in user.payload) {
-        window.localStorage.setItem("token", user.payload.token!);
-        router.push("/");
-      }
-    } catch (err) {
-      console.log(err);
-      window.alert("Не удалось зарегистрироваться");
-    }
-  };
+  //     if (!user.payload) {
+  //       return window.alert("Не удалось зарегистрироваться!");
+  //     }
+  //     if ("token" in user.payload) {
+  //       window.localStorage.setItem("token", user.payload.token!);
+  //       router.push("/");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     window.alert("Не удалось зарегистрироваться");
+  //   }
+  // };
 
-  if (data) {
-    return router.push("/");
-  }
+  // if (data) {
+  //   return router.push("/");
+  // }
 
   return (
     <div className={styles.registration} data-testid="Login">
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.form}>
         <div className={styles.form__content}>
           <h2 className={styles.form__title}>Регистрация</h2>
-          <div className={styles.form__loading}>
+          {/* <div className={styles.form__loading}>
             <ClipLoader loading={isLoading} color="#39ca81" />
-          </div>
+          </div> */}
           <div className={styles.form__inputs}>
             <div className={styles.form__input}>
               <input
