@@ -1,10 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { HYDRATE } from "next-redux-wrapper";
 
 import { TestProps } from "propTypes";
 import { TestState } from "./types";
 
-import axios from "axios";
+import axios from "utils/axios";
 
 //Получить тесты
 export const fetchTests = createAsyncThunk<
@@ -13,7 +12,6 @@ export const fetchTests = createAsyncThunk<
   { rejectValue: TestProps }
 >("tests/fetchTests", async () => {
   const { data } = await axios.get("/tests");
-  console.log(data);
   return data;
 });
 
@@ -66,7 +64,6 @@ const testSlice = createSlice({
   name: "tests",
   initialState,
   reducers: {},
-
   extraReducers: (builder) => {
     builder
 

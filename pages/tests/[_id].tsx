@@ -26,20 +26,20 @@ import { TestProps } from "propTypes";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { _id } = context.params!;
-  const { data } = await axios.get<TestProps[]>(`/tests/${_id}`);
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const { _id } = context.params!;
+//   const { data } = await axios.get<TestProps[]>(`/tests/${_id}`);
 
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
+//   if (!data) {
+//     return {
+//       notFound: true,
+//     };
+//   }
 
-  return {
-    props: { test: data },
-  };
-};
+//   return {
+//     props: { test: data },
+//   };
+// };
 
 const FullTest = ({ test }: { test: TestProps }) => {
   // const { id } = useParams();

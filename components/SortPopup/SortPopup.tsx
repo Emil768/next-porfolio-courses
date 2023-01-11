@@ -3,11 +3,11 @@ import { Popup } from "components";
 import { useState } from "react";
 import styles from "./SortPopup.module.scss";
 
-import { useAppDispatch } from "redux/hooks";
-import { fetchSortBy } from "redux/slices";
+// import { useAppDispatch } from "redux/hooks";
+// import { fetchSortBy } from "redux/slices";
 
 export const SortPopup = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [activePopup, setActivePopup] = useState(false);
   const [activeType, setActiveType] = useState({
     name: "популярности",
@@ -19,7 +19,7 @@ export const SortPopup = () => {
       name: "популярности",
       type: "views",
       onClickPopup({ name, type }: PopupActiveProps) {
-        dispatch(fetchSortBy("views"));
+        // dispatch(fetchSortBy("views"));
         setActiveType({ name, type });
       },
     },
@@ -27,7 +27,7 @@ export const SortPopup = () => {
       name: "дате ",
       type: "date",
       onClickPopup({ name, type }: PopupActiveProps) {
-        dispatch(fetchSortBy("date"));
+        // dispatch(fetchSortBy("date"));
         setActiveType({ name, type });
       },
     },
@@ -35,7 +35,7 @@ export const SortPopup = () => {
       name: "лайкам",
       type: "likes",
       onClickPopup({ name, type }: PopupActiveProps) {
-        dispatch(fetchSortBy("likes"));
+        // dispatch(fetchSortBy("likes"));
         setActiveType({ name, type });
       },
     },

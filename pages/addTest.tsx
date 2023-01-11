@@ -11,12 +11,12 @@ import axios from "axios";
 
 export const TestContext = createContext<AddTestContextType | null>(null);
 
-export const AddTest = () => {
+const AddTest = () => {
   // const { id } = useParams();
   // const navigate = useNavigate();
 
   // const isEditable = Boolean(id);
-  const isAuth = useAppSelector((state) => Boolean(state.auth.data));
+  // const isAuth = useAppSelector((state) => Boolean(state.auth.data));
 
   const [isToggleNav, setIsToggleNav] = useState(true);
   const [data, setData] = useState<MainAddTestProps>({
@@ -179,3 +179,5 @@ export const AddTest = () => {
     </form>
   );
 };
+
+export default AddTest;

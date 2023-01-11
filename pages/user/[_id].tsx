@@ -1,5 +1,5 @@
 import { AllUserActionProps, TestProps, UserProps } from "propTypes";
-import styles from "./UserInfo.module.scss";
+import styles from "styles/UserInfo.module.scss";
 // import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -16,38 +16,57 @@ import {
 
 import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 
-export const UserInfo = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { _id } = context.params!;
+
+  const { data } = await axios.get<UserProps>(`/auth/me/${_id}`);
+  console.log(data);
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { userInfo: data },
+  };
+};
+
+const UserInfo = ({ userInfo }: { userInfo: UserProps }) => {
   const router = useRouter();
-  console.log(router);
-  const [userInfo, setUserInfo] = useState({
-    user: {} as UserProps,
-    data: {} as AllUserActionProps,
-  });
+
+  console.log(userInfo);
+
+  // const [userInfo, setUserInfo] = useState({
+  //   user: {} as UserProps,
+  //   data: {} as AllUserActionProps,
+  // });
   const [categoryType, setCategoryType] = useState("tests");
   const [isLoading, setIsLoading] = useState(true);
 
-  const getUserData = (): UserProps =>
-    axios.get(`/auth/me/${id}`).then(({ data }: { data: UserProps }) => data);
+  //   const getUserData = (): UserProps =>
+  //     axios.get(`/auth/me/${id}`).then(({ data }: { data: UserProps }) => data);
 
-  const getUserCategory = (): TestProps[] =>
-    axios
-      .get(`/getActionsUser/${id}`)
-      .then(({ data }: { data: TestProps[] }) => data);
+  //   const getUserCategory = (): TestProps[] =>
+  //     axios
+  //       .get(`/getActionsUser/${id}`)
+  //       .then(({ data }: { data: TestProps[] }) => data);
 
-  const handlerFetchData = () => {
-    Promise.all([getUserData(), getUserCategory()]).then(function (results) {
-      setUserInfo({
-        user: results[0],
-        data: { ...userInfo.data, ...results[1] },
-      });
-      setIsLoading(false);
-    });
-  };
+  //   const handlerFetchData = () => {
+  //     Promise.all([getUserData(), getUserCategory()]).then(function (results) {
+  //       setUserInfo({
+  //         user: results[0],
+  //         data: { ...userInfo.data, ...results[1] },
+  //       });
+  //       setIsLoading(false);
+  //     });
+  //   };
 
-  useEffect(() => {
-    handlerFetchData();
-  }, [id]);
+  //   useEffect(() => {
+  //     handlerFetchData();
+  //   }, [id]);
 
   const handlerSwitchCategory = (title: string) => setCategoryType(title);
 
@@ -59,18 +78,18 @@ export const UserInfo = () => {
         <div className={styles.user__content}>
           <div className={styles.user__avatar}>
             <div className={styles.questions__image}>
-              <img src={userInfo.user.avatarUrl.url} alt="avatar" />
+              <img src={userInfo.avatarUrl.url} alt="avatar" />
             </div>
 
             <div className={styles.user__contact}>
               <div className={styles.user__email}>
                 <EmailIcon width={16} />
-                {userInfo.user.email}
+                {userInfo.email}
               </div>
-              <h2 className={styles.user__name}>@{userInfo.user.fullName}</h2>
+              <h2 className={styles.user__name}>@{userInfo.fullName}</h2>
               <div className={styles.user__date}>
                 <DateIcon width={16} />
-                {new Date(userInfo.user.createdAt!).toLocaleDateString(
+                {new Date(userInfo.createdAt!).toLocaleDateString(
                   "ru-RU",
                   options
                 )}
@@ -78,7 +97,7 @@ export const UserInfo = () => {
             </div>
           </div>
 
-          <div className={styles.user__statistics}>
+          {/* <div className={styles.user__statistics}>
             <div className={styles.user__categories}>
               <div
                 className={
@@ -179,9 +198,11 @@ export const UserInfo = () => {
                 }
               })()}
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
   );
 };
+
+export default UserInfo;

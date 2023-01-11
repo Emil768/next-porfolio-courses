@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { UserProps } from "propTypes";
-import { fethAuthRegister } from "redux/slices";
+
 import { ClipLoader } from "react-spinners";
 
 import styles from "styles/Registration.module.scss";
@@ -12,13 +11,11 @@ import { EmailIcon, FolderIcon, UserIcon, ImageIcon } from "public/icons";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import useAuthStore from "store/auth";
 
 const Registration = () => {
-  // const dispatch = useAppDispatch();
-  // const { data, status } = useAppSelector((state) => state.auth);
-
   // const isLoading = Boolean(status === "loading");
-
+  const { fetchAuthRegister } = useAuthStore();
   const router = useRouter();
 
   const {
@@ -36,38 +33,40 @@ const Registration = () => {
     mode: "onChange",
   });
 
-  // const onSubmit = async ({ fullName, email, password, avatarUrl }: any) => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("picture", avatarUrl[0]);
+  const onSubmit = async ({ fullName, email, password, avatarUrl }: any) => {
+    try {
+      const formData = new FormData();
+      formData.append("picture", avatarUrl[0]);
 
-  //     const newAvatarUrl = await axios.post("/uploads", formData);
-  //     const { secure_url, public_id } = newAvatarUrl.data;
+      const newAvatarUrl = await axios.post("/uploads", formData);
 
-  //     const fields: UserProps = {
-  //       fullName,
-  //       email,
-  //       password,
-  //       avatarUrl: {
-  //         public_id: public_id,
-  //         url: secure_url,
-  //       },
-  //     };
+      console.log(newAvatarUrl);
+      const { secure_url, public_id } = newAvatarUrl.data;
 
-  //     const user = await dispatch(fethAuthRegister(fields));
+      const fields: UserProps = {
+        fullName,
+        email,
+        password,
+        avatarUrl: {
+          public_id: public_id,
+          url: secure_url,
+        },
+      };
 
-  //     if (!user.payload) {
-  //       return window.alert("Не удалось зарегистрироваться!");
-  //     }
-  //     if ("token" in user.payload) {
-  //       window.localStorage.setItem("token", user.payload.token!);
-  //       router.push("/");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //     window.alert("Не удалось зарегистрироваться");
-  //   }
-  // };
+      const data = await fetchAuthRegister(fields);
+      console.log(data);
+      if (!data) {
+        return window.alert("Не удалось зарегистрироваться!");
+      }
+      if ("token" in data) {
+        window.localStorage.setItem("token", data.token!);
+        router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+      window.alert("Не удалось зарегистрироваться");
+    }
+  };
 
   // if (data) {
   //   return router.push("/");
@@ -75,7 +74,7 @@ const Registration = () => {
 
   return (
     <div className={styles.registration} data-testid="Login">
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.form__content}>
           <h2 className={styles.form__title}>Регистрация</h2>
           {/* <div className={styles.form__loading}>

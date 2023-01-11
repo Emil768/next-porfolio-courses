@@ -3,16 +3,14 @@ import styles from "styles/Tests.module.scss";
 
 import { Test, Categories, SortPopup, EmptyBlock } from "components";
 
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { fetchCategory, fetchTests } from "redux/slices";
 import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/router";
 import { GetServerSideProps, GetStaticProps } from "next/types";
-import { wrapper } from "redux/store";
+
 import axios from "utils/axios";
 import { TestProps } from "propTypes";
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await axios.get<TestProps[]>("/tests");
 
   if (!data) {
@@ -27,20 +25,8 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Tests = ({ tests }: { tests: TestProps[] }) => {
-  // const { tests, status } = useAppSelector((state) => state.tests);
   const { pathname } = useRouter();
-  // const dispatch = useAppDispatch();
-
-  // const isTestsLoading = status === "loading";
-  // const isTestsError = status === "error";
-
-  // useEffect(() => {
-  //   if (pathname) {
-  //     dispatch(fetchCategory(pathname));
-  //   } else {
-  //     dispatch(fetchTests());
-  //   }
-  // }, [pathname]);
+  console.log(tests);
 
   return (
     <section className={styles.notes}>

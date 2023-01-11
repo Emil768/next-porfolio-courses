@@ -1,35 +1,29 @@
 import { useState } from "react";
-import styles from "./UserPanel.module.scss";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { logout } from "redux/slices";
-
 import { PopupItems } from "propTypes";
 import { Popup } from "components";
 
 import { ArrowIcon } from "public/icons";
+import useAuthStore from "store/auth";
+
+import styles from "./UserPanel.module.scss";
 
 export const UserPanel = () => {
+  const { user, logout } = useAuthStore();
   const [userState, setUserState] = useState(false);
-  const dispath = useAppDispatch();
-
-  const { data } = useAppSelector((state) => state.auth);
-
   const userSettings: PopupItems[] = [
     {
       name: "Профиль",
-
-      link: `/user/${data?._id}`,
+      link: `/user/${user._id}`,
     },
     {
       name: "Добавить тест",
-
-      link: "/add-test",
+      link: "/addTest",
     },
     {
       name: "Выйти",
       onClickPopup() {
         if (window.confirm("Вы действительно хотите выйти?")) {
-          dispath(logout());
+          logout();
           window.localStorage.removeItem("token");
         }
       },
@@ -40,11 +34,11 @@ export const UserPanel = () => {
     <div className={styles.user__panel} data-testid="UserPanel">
       <div className={styles.author} onClick={() => setUserState(!userState)}>
         <img
-          src={data?.avatarUrl.url}
+          src={user.avatarUrl.url}
           alt=""
           className={styles.author__avatar}
         />
-        <ArrowIcon className={styles.user__panelArrow} width={10} />
+        <ArrowIcon className={styles.user__panelArrow} />
       </div>
       <Popup active={userState} items={userSettings} />
     </div>

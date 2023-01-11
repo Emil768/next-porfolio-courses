@@ -3,8 +3,8 @@ import styles from "./Test.module.scss";
 
 import { LikeIcon, UnlikeIcon } from "public/icons";
 
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { fetchAddLike, fetchRemoveLike } from "redux/slices";
+// import { useAppDispatch, useAppSelector } from "redux/hooks";
+// import { fetchAddLike, fetchRemoveLike } from "redux/slices";
 import Link from "next/link";
 
 export const Test = ({
@@ -16,13 +16,13 @@ export const Test = ({
   likes,
   backgroundImage,
 }: TestProps) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   // const { data } = useAppSelector((state) => state.auth);
 
   // const checkTestId = likes.find((item) => item.likeBy._id === data?._id);
 
-  const onLikeTest = async () => dispatch(fetchAddLike(_id));
-  const onUnlikeTest = async () => dispatch(fetchRemoveLike(_id));
+  // const onLikeTest = async () => dispatch(fetchAddLike(_id));
+  // const onUnlikeTest = async () => dispatch(fetchRemoveLike(_id));
 
   return (
     <div className={styles.note}>

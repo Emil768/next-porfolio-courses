@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios from "utils/axios";
 import { CommentProps, TestProps } from "propTypes";
 import {
   AnswerStateProps,

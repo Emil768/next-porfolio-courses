@@ -1,4 +1,4 @@
-import { TestProps } from "propTypes";
+import { TestProps } from "@proptypes";
 
 export type AnswerStateProps = { index: number | null; answer?: string };
 

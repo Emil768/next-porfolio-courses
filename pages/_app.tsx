@@ -1,21 +1,21 @@
 import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
 import { Container, Header } from "components";
-import { store, wrapper } from "redux/store";
 
 import "../styles/index.scss";
+import { useEffect } from "react";
+import useAuthStore from "store/auth";
 
-const App = ({ Component, ...rest }: AppProps) => {
-  const { store, props } = wrapper.useWrappedStore(rest);
-  const { pageProps } = props;
+const App = ({ Component, pageProps }: AppProps) => {
+  const { fethAuthMe } = useAuthStore();
+
+  useEffect(() => {
+    fethAuthMe();
+  }, []);
+
   return (
     <>
       <Container>
-        <Header />
-        <Provider store={store}>
-          {" "}
-          <Component {...pageProps} />
-        </Provider>
+        <Header /> <Component {...pageProps} />
       </Container>
     </>
   );
