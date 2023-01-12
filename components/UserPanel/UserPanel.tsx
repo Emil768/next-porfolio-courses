@@ -3,7 +3,7 @@ import { PopupItems } from "propTypes";
 import { Popup } from "components";
 
 import { ArrowIcon } from "public/icons";
-import useAuthStore from "store/auth";
+import { useAuthStore } from "store";
 
 import styles from "./UserPanel.module.scss";
 

@@ -1,13 +1,17 @@
 import styles from "./AnswerBlockOffer.module.scss";
-import { onGetCurrentAnswer } from "redux/slices";
-import { useDispatch } from "react-redux";
+
 import debounce from "lodash.debounce";
+import { AnswerCurrentProps } from "propTypes";
 
-export const AnswerBlockOffer = ({ keyIndex }: { keyIndex: number }) => {
-  const dispatch = useDispatch();
-
+export const AnswerBlockOffer = ({
+  keyIndex,
+  onGetCurrentAnswer,
+}: {
+  keyIndex: number;
+  onGetCurrentAnswer: ({ index, answer }: AnswerCurrentProps) => void;
+}) => {
   const onGetAnswer = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    dispatch(onGetCurrentAnswer({ index: keyIndex, answer: e.target.value }));
+    onGetCurrentAnswer({ index: keyIndex, answer: e.target.value });
 
   const onDebounceOnChange = debounce(onGetAnswer, 200);
 

@@ -11,7 +11,7 @@ import { EmailIcon, FolderIcon, UserIcon, ImageIcon } from "public/icons";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import useAuthStore from "store/auth";
+import { useAuthStore } from "store";
 
 const Registration = () => {
   // const isLoading = Boolean(status === "loading");

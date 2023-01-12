@@ -3,7 +3,7 @@ import { Container, Header } from "components";
 
 import "../styles/index.scss";
 import { useEffect } from "react";
-import useAuthStore from "store/auth";
+import { useAuthStore } from "store";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { fethAuthMe } = useAuthStore();

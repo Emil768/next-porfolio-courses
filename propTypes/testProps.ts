@@ -6,7 +6,15 @@ export interface CategoryOption {
   isDisabled?: boolean;
 }
 export type ImageUrlProps = { public_id: string; url: string };
+export type AnswerCurrentProps = { index: number | null; answer?: string };
 export type TypeTest = "test" | "offer";
+
+export interface QuizStateProps {
+  currentAnswer: AnswerCurrentProps;
+  currentQuesIndex: number;
+  score: number;
+  showScore: boolean;
+}
 
 export interface QuesProps {
   _id: string;
@@ -69,6 +77,7 @@ export interface AllUserActionProps {
 
 export interface AnswerBlockProps extends AnswersProps {
   keyIndex: number;
+  onGetCurrentAnswer: ({ index, answer }: AnswerCurrentProps) => void;
 }
 
 //Add test props

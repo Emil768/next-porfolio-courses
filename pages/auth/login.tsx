@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import styles from "styles/Login.module.scss";
-import useAuthStore from "store/auth";
+import { useAuthStore } from "store";
 
 const Login = () => {
   const { user, fetchAuth } = useAuthStore();

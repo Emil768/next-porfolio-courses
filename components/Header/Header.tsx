@@ -5,7 +5,7 @@ import { UserPanel } from "components";
 import { LogoIcon } from "public/gallery";
 import { useState } from "react";
 import Link from "next/link";
-import useAuthStore from "store/auth";
+import { useAuthStore } from "store";
 import { useRouter } from "next/router";
 
 export const Header = () => {
