@@ -48,8 +48,8 @@ const FullTest = ({ test }: { test: TestProps }) => {
     <main className={styles.fullTest}>
       <FullTestBlock test={test} />
       <div className={styles.fullTest__info}>
-        {/* <TopResults />
-        <Comments {...test} /> */}
+        <TopResults id={test._id} />
+        {/* <Comments {...test} /> */}
       </div>
     </main>
   );

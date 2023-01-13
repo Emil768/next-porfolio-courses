@@ -1,16 +1,15 @@
 import { EmailIcon, FolderIcon } from "public/icons";
 import { useForm } from "react-hook-form";
-import { LoginProps } from "propTypes";
+import { LoginProps, UserProps } from "propTypes";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
 import styles from "styles/Login.module.scss";
-import { useAuthStore } from "store";
+
+import axios from "utils/axios";
 
 const Login = () => {
-  const { user, fetchAuth } = useAuthStore();
   const router = useRouter();
-  const isAuth = Boolean(Object.keys(user).length !== 0);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -22,21 +21,19 @@ const Login = () => {
 
   const onSubmit = async (values: LoginProps) => {
     try {
-      const data = await fetchAuth(values);
+      const { data } = await axios.post<UserProps>("/auth/login", values);
       if (!data) {
         return window.alert("Пользователь не найден!");
       }
       if ("token" in data) {
         window.localStorage.setItem("token", data.token!);
+        window.dispatchEvent(new Event("storage"));
+        router.push("/");
       }
     } catch (err) {
       return window.alert("Пользователь не найден!");
     }
   };
-
-  if (isAuth) {
-    router.push("/");
-  }
 
   return (
     <div className={styles.login}>

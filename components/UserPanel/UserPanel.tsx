@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PopupItems } from "propTypes";
+import { PopupItems, TestProps, UserProps } from "propTypes";
 import { Popup } from "components";
 
 import { ArrowIcon } from "public/icons";
@@ -7,8 +7,13 @@ import { useAuthStore } from "store";
 
 import styles from "./UserPanel.module.scss";
 
-export const UserPanel = () => {
-  const { user, logout } = useAuthStore();
+export const UserPanel = ({
+  user,
+  logout,
+}: {
+  user: UserProps;
+  logout: () => void;
+}) => {
   const [userState, setUserState] = useState(false);
   const userSettings: PopupItems[] = [
     {
