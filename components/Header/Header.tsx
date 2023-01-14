@@ -1,40 +1,17 @@
 import styles from "./Header.module.scss";
 import { UserPanel } from "components";
-// import { useAppSelector } from "@redux/hooks";
-
 import { LogoIcon } from "public/gallery";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { useAuthStore } from "store";
+
 import { useRouter } from "next/router";
-import axios from "utils/axios";
-import { TestProps, UserProps } from "propTypes";
+
+import useAuthStore from "store/auth";
 
 export const Header = () => {
   const router = useRouter();
   const [menuActive, setMenuActive] = useState(false);
-  const [user, setUser] = useState<UserProps>({} as UserProps);
-
-  const isAuth = Boolean(Object.keys(user).length !== 0);
-  const logout = () => setUser({} as UserProps);
-
-  useEffect(() => {
-    const fetchAuthMe = async () => {
-      const checkAuth = window.localStorage.getItem("token");
-
-      if (checkAuth) {
-        const { data } = await axios.get<UserProps>("/auth/me");
-        setUser(data);
-      }
-    };
-
-    fetchAuthMe();
-
-    window.addEventListener("storage", fetchAuthMe);
-    return () => {
-      window.removeEventListener("storage", fetchAuthMe);
-    };
-  }, []);
+  const { user, status } = useAuthStore();
 
   return (
     <header className={styles.header}>
@@ -54,7 +31,7 @@ export const Header = () => {
           <ul
             className={
               menuActive
-                ? isAuth
+                ? user
                   ? [
                       styles.header__list,
                       styles.header__listAuth,
@@ -114,7 +91,7 @@ export const Header = () => {
               </Link>
             </li>
           </ul>
-          {isAuth ? <UserPanel user={user} logout={logout} /> : null}
+          {status === "loaded" ? user && <UserPanel {...user} /> : null}
         </div>
       </div>
     </header>

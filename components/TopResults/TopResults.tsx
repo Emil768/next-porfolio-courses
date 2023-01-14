@@ -1,12 +1,10 @@
 import axios from "utils/axios";
 
 import useSwr from "swr";
-import { useEffect, useState } from "react";
 import styles from "./TopResults.module.scss";
-// import { Link, useParams } from "react-router-dom";
 import { ScoreProps } from "propTypes";
 import Link from "next/link";
-import { GetStaticProps } from "next";
+
 import { ClipLoader } from "react-spinners";
 
 export const TopResults = ({ id }: { id: string }) => {
@@ -15,17 +13,14 @@ export const TopResults = ({ id }: { id: string }) => {
     return data;
   };
 
-  const { data, error } = useSwr("getScore", fetcher);
+  const { data } = useSwr("getScore", fetcher);
 
-  if (error) return <div>Error...</div>;
-  if (!data) return <ClipLoader loading={data} color="#39ca81" />;
-
-  console.log(data);
   return (
     <div className={styles.topResults} data-testid="TopResults">
-      {data.length ? (
-        <div className={styles.topResults__content}>
-          <h3 className={styles.topResults__title}>Топ прохождений🔥</h3>
+      <div className={styles.topResults__content}>
+        <h3 className={styles.topResults__title}>Топ прохождений🔥</h3>
+
+        {data ? (
           <div className={styles.topResulst__chart}>
             {data.slice(-3).map((item) => (
               <ul className={styles.topResults__list} key={item._id}>
@@ -46,10 +41,10 @@ export const TopResults = ({ id }: { id: string }) => {
               </ul>
             ))}
           </div>
-        </div>
-      ) : (
-        <ClipLoader loading={data} color="#39ca81" />
-      )}
+        ) : (
+          <ClipLoader loading={data} color="#39ca81" />
+        )}
+      </div>
     </div>
   );
 };

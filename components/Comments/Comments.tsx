@@ -3,26 +3,27 @@ import { useRef } from "react";
 import styles from "./Comments.module.scss";
 
 import { TestProps } from "propTypes";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { fetchAddComment } from "redux/slices";
 import { CommentsBlock } from "components";
 import Link from "next/link";
+import axios from "utils/axios";
+import useQuizStore from "store/quiz";
+import useAuthStore from "store/auth";
 
-export const Comments = ({ _id, comments }: TestProps) => {
-  const dispatch = useAppDispatch();
+export const Comments = () => {
   const textRef = useRef<HTMLTextAreaElement | null>(null);
-  const { data } = useAppSelector((state) => state.auth);
+  const { fetchAddComment, quiz } = useQuizStore();
+  const { user } = useAuthStore();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (textRef.current?.value) {
       const comment = {
-        testId: _id,
+        testId: quiz._id,
         text: textRef.current?.value!,
       };
 
-      dispatch(fetchAddComment(comment));
+      fetchAddComment(comment);
       textRef.current.value = "";
     }
   };
@@ -33,7 +34,7 @@ export const Comments = ({ _id, comments }: TestProps) => {
     }
   };
 
-  const commentsCompleted = comments ? comments : [];
+  const commentsCompleted = quiz.comments ? quiz.comments : [];
 
   return (
     <div className={styles.comments} data-testid="Comments">
@@ -43,19 +44,18 @@ export const Comments = ({ _id, comments }: TestProps) => {
           {commentsCompleted.length}
         </span>
       </div>
-
       <div className={styles.comments__content}>
         {commentsCompleted.map((item) => (
           <CommentsBlock
             {...item}
             key={item._id}
-            testId={_id}
+            testId={quiz._id}
             onReplyComment={handlerOnReplyComment}
           />
         ))}
       </div>
 
-      {data ? (
+      {user._id ? (
         <form className={styles.comments__form} onSubmit={onSubmit}>
           <textarea
             className={styles.comments__field}

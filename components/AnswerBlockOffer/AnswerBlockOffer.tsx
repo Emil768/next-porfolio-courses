@@ -1,15 +1,10 @@
 import styles from "./AnswerBlockOffer.module.scss";
 
 import debounce from "lodash.debounce";
-import { AnswerCurrentProps } from "propTypes";
+import useQuizStore from "store/quiz";
 
-export const AnswerBlockOffer = ({
-  keyIndex,
-  onGetCurrentAnswer,
-}: {
-  keyIndex: number;
-  onGetCurrentAnswer: ({ index, answer }: AnswerCurrentProps) => void;
-}) => {
+export const AnswerBlockOffer = ({ keyIndex }: { keyIndex: number }) => {
+  const { onGetCurrentAnswer } = useQuizStore();
   const onGetAnswer = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     onGetCurrentAnswer({ index: keyIndex, answer: e.target.value });
 

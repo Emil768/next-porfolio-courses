@@ -1,7 +1,7 @@
 import { LoginProps, TestProps, UserProps } from "propTypes";
 
 export type AnswerStateProps = { index: number | null; answer?: string };
-
+export type CommentPropsCreate = { testId: string; text: string };
 export type AuthStateProps = {
   user: UserProps;
   status: "loading" | "loaded" | "error";
@@ -18,6 +18,10 @@ export type QuizStateProps = {
   showScore: boolean;
   status: "loading" | "loaded" | "error";
   fetchTest: (data: TestProps) => void;
+  fetchAddComment: (comment: CommentPropsCreate) => void;
+  setAnswerQuestion: (answer: AnswerStateProps) => void;
+  onGetCurrentAnswer: (answer: AnswerStateProps) => void;
+  setShowScore: () => void;
   onNextQuestion: () => void;
 };
 

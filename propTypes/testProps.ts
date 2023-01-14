@@ -77,7 +77,6 @@ export interface AllUserActionProps {
 
 export interface AnswerBlockProps extends AnswersProps {
   keyIndex: number;
-  onGetCurrentAnswer: ({ index, answer }: AnswerCurrentProps) => void;
 }
 
 //Add test props

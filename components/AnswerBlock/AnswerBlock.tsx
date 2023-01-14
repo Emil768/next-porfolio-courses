@@ -1,13 +1,10 @@
 import { AnswerBlockProps } from "propTypes";
+import useQuizStore from "store/quiz";
 
 import styles from "./AnswerBlock.module.scss";
 
-export const AnswerBlock = ({
-  answer,
-  _id,
-  keyIndex,
-  onGetCurrentAnswer,
-}: AnswerBlockProps) => {
+export const AnswerBlock = ({ answer, _id, keyIndex }: AnswerBlockProps) => {
+  const { onGetCurrentAnswer } = useQuizStore();
   const onChangeAnswer = (e: React.ChangeEvent<HTMLInputElement>) =>
     onGetCurrentAnswer({ index: keyIndex });
   return (

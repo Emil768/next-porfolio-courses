@@ -20,6 +20,7 @@ export * from "./SortPopup/SortPopup";
 export * from "./TestSwitch/TestSwitch";
 export * from "./PublishSwitch/PublishSwitch";
 export * from "./LikesSwitch/LikesSwitch";
+export * from "./EmptyBlock/EmptyBlock";
 export * from "./CommentSwitch/CommentSwitch";
 export * from "./TopResults/TopResults";
 export * from "./FullTestBlock/FullTestBlock";

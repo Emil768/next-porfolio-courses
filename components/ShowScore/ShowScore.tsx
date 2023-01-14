@@ -7,26 +7,27 @@ import "react-circular-progressbar/dist/styles.css";
 import { TestProps, UserProps } from "propTypes";
 import { useEffect } from "react";
 import axios from "utils/axios";
-import { useAuthStore } from "store";
-// import { useParams } from "react-router-dom";
+import useAuthStore from "store/auth";
 
 interface ShowScoreProps extends TestProps {
   totalScore: number;
 }
 
 export const ShowScore = ({ _id, ques, totalScore }: ShowScoreProps) => {
-  const fetcher = async () => {
-    const { data } = await axios.post(`/getScore/${_id}`, {
-      totalScore: resultScore,
-    });
-    return data;
-  };
+  const { user } = useAuthStore();
 
   const resultScore = Math.round((totalScore / ques.length) * 100);
-  const { data, error } = useSwr("getScore", fetcher);
 
-  if (error) return <div>Error...</div>;
-  if (!data) return <div>Sad request..</div>;
+  const fetcher = async () => {
+    if (user) {
+      const { data } = await axios.post(`/getScore/${_id}`, {
+        totalScore: resultScore,
+      });
+      return data;
+    }
+  };
+
+  const { data, error, isLoading } = useSwr("getScoreUser", fetcher);
 
   return (
     <div className={styles.score}>
@@ -38,7 +39,7 @@ export const ShowScore = ({ _id, ques, totalScore }: ShowScoreProps) => {
             )}
           </ProgressProvider>
         </div>
-        <ResultList />
+        <ResultList score={totalScore} ques={ques} />
       </div>
       {ques.map((item, index) => (
         <ScoreBlock {...item} key={index} id={index} />

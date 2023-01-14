@@ -1,12 +1,15 @@
 import { useRef, useState } from "react";
-import { CommentProps } from "propTypes";
+import { CommentProps, UserProps } from "propTypes";
 import styles from "./CommentsBlock.module.scss";
 
 import { EditIcon, RemoveIcon, ReplyIcon, SuccessIcon } from "public/icons";
-import { fetchRemoveComment, fetchUpdateComment } from "redux/slices";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
+
 import ContentEditable from "react-contenteditable";
 import Link from "next/link";
+import axios from "utils/axios";
+
+import useSWR from "swr";
+import useAuthStore from "store/auth";
 
 interface CommentsBlockProps extends CommentProps {
   onReplyComment: (name: string) => void;
@@ -20,9 +23,8 @@ export const CommentsBlock = ({
   _id,
   onReplyComment,
 }: CommentsBlockProps) => {
-  const dispatch = useAppDispatch();
-  const { data } = useAppSelector((state) => state.auth);
   const [isEdit, setIsEdit] = useState(true);
+  const { user } = useAuthStore();
 
   const textComment = useRef(text);
 
@@ -30,19 +32,22 @@ export const CommentsBlock = ({
     textComment.current = name;
   };
 
-  const handlerOnRemoveComment = async (_id: string) => {
-    dispatch(fetchRemoveComment({ id: _id, testId }));
-  };
+  const handlerOnRemoveComment = async (_id: string) =>
+    await axios.post(`/comments/${_id}`, { testId });
 
   const handlerOnReplyComment = (name: string) => {
     onReplyComment(name);
   };
 
-  const handlerOnEditComment = () => {
-    dispatch(
-      fetchUpdateComment({ testId, text: textComment.current, id: _id })
-    );
-    setIsEdit(true);
+  const handlerOnEditComment = async () => {
+    const { data } = await axios.post(`/comments/edit/${_id}`, {
+      testId,
+      text: textComment.current,
+    });
+
+    if (data) {
+      setIsEdit(true);
+    }
   };
 
   return (
@@ -79,7 +84,7 @@ export const CommentsBlock = ({
             <ReplyIcon width={15} />
             Ответить
           </div>
-          {postedBy._id === (data && data._id) && (
+          {postedBy._id === (user && user._id) && (
             <div className={styles.comments__panel}>
               <div className={styles.comments__edit}>
                 {isEdit ? (

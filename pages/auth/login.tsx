@@ -7,9 +7,12 @@ import Link from "next/link";
 import styles from "styles/Login.module.scss";
 
 import axios from "utils/axios";
+import useAuthStore from "store/auth";
 
 const Login = () => {
   const router = useRouter();
+
+  const { fetchAuth } = useAuthStore();
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -21,13 +24,13 @@ const Login = () => {
 
   const onSubmit = async (values: LoginProps) => {
     try {
-      const { data } = await axios.post<UserProps>("/auth/login", values);
+      const data = await fetchAuth(values);
+
       if (!data) {
         return window.alert("Пользователь не найден!");
       }
       if ("token" in data) {
         window.localStorage.setItem("token", data.token!);
-        window.dispatchEvent(new Event("storage"));
         router.push("/");
       }
     } catch (err) {
