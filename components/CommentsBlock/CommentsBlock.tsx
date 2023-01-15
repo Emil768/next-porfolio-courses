@@ -6,10 +6,9 @@ import { EditIcon, RemoveIcon, ReplyIcon, SuccessIcon } from "public/icons";
 
 import ContentEditable from "react-contenteditable";
 import Link from "next/link";
-import axios from "utils/axios";
 
-import useSWR from "swr";
 import useAuthStore from "store/auth";
+import useQuizStore from "store/quiz";
 
 interface CommentsBlockProps extends CommentProps {
   onReplyComment: (name: string) => void;
@@ -24,7 +23,8 @@ export const CommentsBlock = ({
   onReplyComment,
 }: CommentsBlockProps) => {
   const [isEdit, setIsEdit] = useState(true);
-  const { user } = useAuthStore();
+  const { data } = useAuthStore();
+  const { fetchRemoveComment, fetchUpdateComment } = useQuizStore();
 
   const textComment = useRef(text);
 
@@ -32,22 +32,16 @@ export const CommentsBlock = ({
     textComment.current = name;
   };
 
-  const handlerOnRemoveComment = async (_id: string) =>
-    await axios.post(`/comments/${_id}`, { testId });
+  const handlerOnEditComment = async () => {
+    fetchUpdateComment({ id: _id, testId, text: textComment.current });
+
+    setIsEdit(true);
+  };
+
+  const handlerOnRemoveComment = () => fetchRemoveComment({ id: _id, testId });
 
   const handlerOnReplyComment = (name: string) => {
     onReplyComment(name);
-  };
-
-  const handlerOnEditComment = async () => {
-    const { data } = await axios.post(`/comments/edit/${_id}`, {
-      testId,
-      text: textComment.current,
-    });
-
-    if (data) {
-      setIsEdit(true);
-    }
   };
 
   return (
@@ -84,7 +78,7 @@ export const CommentsBlock = ({
             <ReplyIcon width={15} />
             Ответить
           </div>
-          {postedBy._id === (user && user._id) && (
+          {postedBy._id === (data && data._id) && (
             <div className={styles.comments__panel}>
               <div className={styles.comments__edit}>
                 {isEdit ? (
@@ -95,7 +89,7 @@ export const CommentsBlock = ({
               </div>
               <div
                 className={styles.comments__remove}
-                onClick={() => handlerOnRemoveComment(_id)}
+                onClick={handlerOnRemoveComment}
               >
                 <RemoveIcon width={20} />
               </div>

@@ -2,10 +2,10 @@ import { TestProps } from "propTypes";
 import styles from "./Test.module.scss";
 
 import { LikeIcon, UnlikeIcon } from "public/icons";
-
-// import { useAppDispatch, useAppSelector } from "redux/hooks";
-// import { fetchAddLike, fetchRemoveLike } from "redux/slices";
 import Link from "next/link";
+import useAuthStore from "store/auth";
+import axios from "utils/axios";
+import { useRouter } from "next/dist/client/router";
 
 export const Test = ({
   _id,
@@ -16,13 +16,26 @@ export const Test = ({
   likes,
   backgroundImage,
 }: TestProps) => {
-  // const dispatch = useAppDispatch();
-  // const { data } = useAppSelector((state) => state.auth);
+  const router = useRouter();
+  const { data } = useAuthStore();
+  const checkTestId = likes.find((item) => item.likeBy._id === data?._id);
 
-  // const checkTestId = likes.find((item) => item.likeBy._id === data?._id);
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
 
-  // const onLikeTest = async () => dispatch(fetchAddLike(_id));
-  // const onUnlikeTest = async () => dispatch(fetchRemoveLike(_id));
+  const onLikeTest = async () => {
+    await axios.patch<TestProps>("/like", {
+      testId: _id,
+    });
+    refreshData();
+  };
+  const onUnlikeTest = async () => {
+    await axios.patch<TestProps>("/unlike", {
+      testId: _id,
+    });
+    refreshData();
+  };
 
   return (
     <div className={styles.note}>
@@ -56,7 +69,7 @@ export const Test = ({
             Пройти тест
           </Link>
 
-          {/* {data ? (
+          {data ? (
             <div className={styles.note__reactions}>
               <div className={styles.note__reactionUsers}>
                 {likes.slice(-3).map((item) => (
@@ -84,7 +97,7 @@ export const Test = ({
                 </div>
               )}
             </div>
-          ) : null} */}
+          ) : null}
         </div>
       </div>
     </div>

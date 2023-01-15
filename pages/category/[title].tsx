@@ -9,9 +9,10 @@ import { TestProps } from "propTypes";
 import { useEffect } from "react";
 import useTestsStore from "store/tests";
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
-    const { data } = await axios.get<TestProps[]>("/tests");
+    const { title } = context.params!;
+    const { data } = await axios.get<TestProps[]>(`/category/${title}`);
 
     return {
       props: { tests: data },

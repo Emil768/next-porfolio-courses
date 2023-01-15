@@ -12,7 +12,7 @@ import useAuthStore from "store/auth";
 export const Comments = () => {
   const textRef = useRef<HTMLTextAreaElement | null>(null);
   const { fetchAddComment, quiz } = useQuizStore();
-  const { user } = useAuthStore();
+  const { data } = useAuthStore();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ export const Comments = () => {
         ))}
       </div>
 
-      {user._id ? (
+      {data._id ? (
         <form className={styles.comments__form} onSubmit={onSubmit}>
           <textarea
             className={styles.comments__field}

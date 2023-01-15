@@ -7,12 +7,12 @@ import { AuthStateProps } from "./types";
 const useAuthStore = create<AuthStateProps>()(
   devtools(
     (set) => ({
-      user: {} as UserProps,
+      data: {} as UserProps,
       status: "loading",
       fetchAuth: async (values) => {
         try {
           const { data } = await axios.post<UserProps>("/auth/login", values);
-          set({ user: data, status: "loaded" });
+          set({ data, status: "loaded" });
           return data;
         } catch (err) {
           set({ status: "error" });
@@ -21,20 +21,20 @@ const useAuthStore = create<AuthStateProps>()(
       },
       fetchAuthRegister: async (values) => {
         const { data } = await axios.post<UserProps>("/auth/register", values);
-        set({ user: data, status: "loaded" });
+        set({ data, status: "loaded" });
         return data;
       },
       fethAuthMe: async () => {
         try {
           const { data } = await axios.get<UserProps>("/auth/me");
-          set({ user: data, status: "loaded" });
+          set({ data, status: "loaded" });
           return data;
         } catch (err) {
-          set({ user: {} as UserProps, status: "error" });
+          set({ data: {} as UserProps, status: "error" });
         }
       },
       logout: () => {
-        set({ user: {} as UserProps, status: "loading" });
+        set({ data: {} as UserProps, status: "loading" });
       },
     }),
     { name: "auth" }

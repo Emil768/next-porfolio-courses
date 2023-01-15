@@ -69,6 +69,7 @@ export interface TestProps {
 }
 
 export interface AllUserActionProps {
+  user: UserProps;
   allComments: TestProps[];
   allLikes: TestProps[];
   allPublish: TestProps[];

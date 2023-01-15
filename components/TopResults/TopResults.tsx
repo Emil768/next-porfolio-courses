@@ -7,13 +7,13 @@ import Link from "next/link";
 
 import { ClipLoader } from "react-spinners";
 
-export const TopResults = ({ id }: { id: string }) => {
+export const TopResults = ({ testId }: { testId: string }) => {
   const fetcher = async () => {
-    const { data } = await axios.get<ScoreProps[]>(`/getTopScore/${id}`);
+    const { data } = await axios.get<ScoreProps[]>(`/getTopScore/${testId}`);
     return data;
   };
 
-  const { data } = useSwr("getScore", fetcher);
+  const { data } = useSwr("getTopScore", fetcher);
 
   return (
     <div className={styles.topResults} data-testid="TopResults">

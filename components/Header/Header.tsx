@@ -11,7 +11,7 @@ import useAuthStore from "store/auth";
 export const Header = () => {
   const router = useRouter();
   const [menuActive, setMenuActive] = useState(false);
-  const { user, status } = useAuthStore();
+  const { data, status } = useAuthStore();
 
   return (
     <header className={styles.header}>
@@ -31,7 +31,7 @@ export const Header = () => {
           <ul
             className={
               menuActive
-                ? user
+                ? data
                   ? [
                       styles.header__list,
                       styles.header__listAuth,
@@ -91,7 +91,7 @@ export const Header = () => {
               </Link>
             </li>
           </ul>
-          {status === "loaded" ? user && <UserPanel {...user} /> : null}
+          {status === "loaded" ? data && <UserPanel {...data} /> : null}
         </div>
       </div>
     </header>

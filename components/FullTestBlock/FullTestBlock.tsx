@@ -15,8 +15,7 @@ import useAuthStore from "store/auth";
 import useQuizStore from "store/quiz";
 
 export const FullTestBlock = ({ test }: { test: TestProps }) => {
-  const { _id, title, ques } = test;
-  const { user } = useAuthStore();
+  const { data } = useAuthStore();
   const {
     fetchTest,
     currentAnswer,
@@ -32,8 +31,8 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
     fetchTest(test);
   }, [test]);
 
-  const isEditable = user?._id === test.user?._id;
-  const currentQues = ques[currentQuesIndex];
+  const isEditable = data?._id === test.user?._id;
+  const currentQues = test.ques[currentQuesIndex];
 
   const isCurrentAnswer =
     currentAnswer.index !== null && currentAnswer.answer !== "";
@@ -41,10 +40,10 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
   const handlerNextQuiestion = () => {
     if (isCurrentAnswer) {
       const nextQuestion = currentQuesIndex + 1;
-      if (nextQuestion <= ques.length) {
+      if (nextQuestion <= test.ques.length) {
         setAnswerQuestion(currentAnswer);
         onGetCurrentAnswer({ index: null });
-        if (nextQuestion === ques.length) {
+        if (nextQuestion === test.ques.length) {
           setShowScore();
         }
       }
@@ -60,11 +59,11 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
 
   return (
     <div className={styles.fullTest__content}>
-      <h1 className={styles.fullTest__title}>{title}</h1>
+      <h1 className={styles.fullTest__title}>{test.title}</h1>
 
       {isEditable && (
         <div className={styles.fullTest__editable}>
-          <Link href={`/edit/${_id}`}>
+          <Link href={`/addTest/${test._id}`}>
             <EditIcon width={20} />
           </Link>
           <RemoveIcon width={20} />

@@ -4,10 +4,10 @@ import { QuesProps } from "propTypes";
 import { useState } from "react";
 
 interface ScoreBlockProps extends QuesProps {
-  id: number;
+  indexId: number;
 }
 
-export const ScoreBlock = ({ title, answers, id }: ScoreBlockProps) => {
+export const ScoreBlock = ({ title, answers, indexId }: ScoreBlockProps) => {
   const [showAnswer, setShowAnswer] = useState(false);
   return (
     <div>
@@ -16,7 +16,7 @@ export const ScoreBlock = ({ title, answers, id }: ScoreBlockProps) => {
         onClick={() => setShowAnswer(!showAnswer)}
       >
         <span className={styles.score__text}>
-          {id + 1}. {title}
+          {indexId + 1}. {title}
         </span>
         <ArrowIcon
           className={

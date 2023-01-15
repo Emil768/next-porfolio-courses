@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useId, useRef } from "react";
 import styles from "./AddTestMain.module.scss";
 
 import { AddTestContextType, CategoryOption } from "propTypes";
@@ -6,12 +6,14 @@ import Select from "react-select";
 
 import { categoryOptions } from "data";
 import axios from "axios";
-import { TestContext } from "pages/addTest";
+import { TestContext } from "pages/addTest/[id]";
 
 export const AddTestMain = () => {
   const { data, onGetMainProps } = useContext(
     TestContext
   ) as AddTestContextType;
+
+  console.log(data);
 
   const isEmpty = Object.values(data.category).every((value) => Boolean(value));
   const inputFileRef = useRef<HTMLInputElement | null>(null);
@@ -22,7 +24,13 @@ export const AddTestMain = () => {
       const formData = new FormData();
       formData.append("picture", file![0]);
 
-      const newAvatarUrl = await axios.post("/uploads", formData);
+      const newAvatarUrl = await axios.post(
+        "http://localhost:3000/api/upload",
+        formData
+      );
+
+      console.log(newAvatarUrl);
+
       const { secure_url, public_id } = newAvatarUrl.data;
 
       onGetMainProps({
@@ -85,6 +93,7 @@ export const AddTestMain = () => {
       <div className={styles.inputField}>
         <label className={styles.inputField__title}>Категория</label>
         <Select
+          instanceId={useId()}
           closeMenuOnSelect={false}
           options={categoryOptions}
           onChange={(option: CategoryOption | null) =>

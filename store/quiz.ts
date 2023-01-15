@@ -28,6 +28,9 @@ const useQuizStore = create<QuizStateProps>()(
           set({ status: "error" });
         }
       },
+
+      //quiz
+
       setAnswerQuestion: ({ index }: AnswerStateProps) => {
         set((state) => ({
           score: (state.score += state.currentAnswer.answer
@@ -45,8 +48,7 @@ const useQuizStore = create<QuizStateProps>()(
       },
       onGetCurrentAnswer: (answer: AnswerStateProps) =>
         set({ currentAnswer: answer }),
-      onNextQuestion: () =>
-        set((state) => ({ currentQuesIndex: state.currentQuesIndex + 1 })),
+
       setShowScore: () => set({ showScore: true }),
 
       //comments
@@ -60,6 +62,36 @@ const useQuizStore = create<QuizStateProps>()(
 
           set((state) => ({
             quiz: { ...state.quiz, comments: [...state.quiz.comments, data] },
+          }));
+        } catch (err) {
+          set({ status: "error" });
+        }
+      },
+      fetchUpdateComment: async ({ id, testId, text }) => {
+        try {
+          const { data } = await axios.post<CommentProps[]>(
+            `/comments/edit/${id}`,
+            {
+              testId,
+              text,
+            }
+          );
+
+          set((state) => ({
+            quiz: { ...state.quiz, comments: data },
+          }));
+        } catch (err) {
+          set({ status: "error" });
+        }
+      },
+      fetchRemoveComment: async ({ id, testId }) => {
+        try {
+          const { data } = await axios.post<CommentProps[]>(`/comments/${id}`, {
+            testId,
+          });
+
+          set((state) => ({
+            quiz: { ...state.quiz, comments: data },
           }));
         } catch (err) {
           set({ status: "error" });

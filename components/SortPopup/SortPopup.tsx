@@ -2,12 +2,9 @@ import { PopupActiveProps, PopupItems } from "propTypes";
 import { Popup } from "components";
 import { useState } from "react";
 import styles from "./SortPopup.module.scss";
-
-// import { useAppDispatch } from "redux/hooks";
-// import { fetchSortBy } from "redux/slices";
-
+import { useRouter } from "next/dist/client/router";
 export const SortPopup = () => {
-  // const dispatch = useAppDispatch();
+  const router = useRouter();
   const [activePopup, setActivePopup] = useState(false);
   const [activeType, setActiveType] = useState({
     name: "популярности",
@@ -40,6 +37,8 @@ export const SortPopup = () => {
       },
     },
   ];
+
+  console.log(router.asPath);
 
   return (
     <div className={styles.notes__sorted}>

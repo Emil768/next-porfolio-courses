@@ -14,12 +14,12 @@ interface ShowScoreProps extends TestProps {
 }
 
 export const ShowScore = ({ _id, ques, totalScore }: ShowScoreProps) => {
-  const { user } = useAuthStore();
+  const { data } = useAuthStore();
 
   const resultScore = Math.round((totalScore / ques.length) * 100);
 
   const fetcher = async () => {
-    if (user) {
+    if (data) {
       const { data } = await axios.post(`/getScore/${_id}`, {
         totalScore: resultScore,
       });
@@ -27,7 +27,7 @@ export const ShowScore = ({ _id, ques, totalScore }: ShowScoreProps) => {
     }
   };
 
-  const { data, error, isLoading } = useSwr("getScoreUser", fetcher);
+  const {} = useSwr("getScoreUser", fetcher);
 
   return (
     <div className={styles.score}>
@@ -42,7 +42,7 @@ export const ShowScore = ({ _id, ques, totalScore }: ShowScoreProps) => {
         <ResultList score={totalScore} ques={ques} />
       </div>
       {ques.map((item, index) => (
-        <ScoreBlock {...item} key={index} id={index} />
+        <ScoreBlock {...item} key={item._id} indexId={index} />
       ))}
     </div>
   );

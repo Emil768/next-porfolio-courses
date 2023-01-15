@@ -1,7 +1,7 @@
-import { AllUserActionProps, TestProps, UserProps } from "propTypes";
-import styles from "./UserInfo.module.scss";
-// import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { AllUserActionProps } from "propTypes";
+import styles from "styles/UserInfo.module.scss";
+
+import { useState } from "react";
 
 import { DateIcon, EmailIcon } from "public/icons";
 
@@ -14,66 +14,48 @@ import {
   TestSwitch,
 } from "components";
 
-import { ClipLoader } from "react-spinners";
-import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 
-export const UserInfo = () => {
-  const router = useRouter();
-  console.log(router);
-  const [userInfo, setUserInfo] = useState({
-    user: {} as UserProps,
-    data: {} as AllUserActionProps,
-  });
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    const { id } = context.params!;
+    const { data } = await axios.get<AllUserActionProps>(
+      `/getActionsUser/${id}`
+    );
+
+    return {
+      props: { userInfo: data },
+    };
+  } catch (err) {
+    return {
+      props: { userInfo: {} as AllUserActionProps },
+    };
+  }
+};
+
+const UserInfo = ({ userInfo }: { userInfo: AllUserActionProps }) => {
+  const { user, allComments, allLikes, allPublish, allScore } = userInfo;
   const [categoryType, setCategoryType] = useState("tests");
-  const [isLoading, setIsLoading] = useState(true);
-
-  const getUserData = (): UserProps =>
-    axios.get(`/auth/me/${id}`).then(({ data }: { data: UserProps }) => data);
-
-  const getUserCategory = (): TestProps[] =>
-    axios
-      .get(`/getActionsUser/${id}`)
-      .then(({ data }: { data: TestProps[] }) => data);
-
-  const handlerFetchData = () => {
-    Promise.all([getUserData(), getUserCategory()]).then(function (results) {
-      setUserInfo({
-        user: results[0],
-        data: { ...userInfo.data, ...results[1] },
-      });
-      setIsLoading(false);
-    });
-  };
-
-  useEffect(() => {
-    handlerFetchData();
-  }, [id]);
-
   const handlerSwitchCategory = (title: string) => setCategoryType(title);
 
   return (
     <div className={styles.user} data-testid="UserInfo">
-      {isLoading ? (
-        <ClipLoader loading={isLoading} color="#39ca81" />
-      ) : (
+      {Object.keys(userInfo).length !== 0 ? (
         <div className={styles.user__content}>
           <div className={styles.user__avatar}>
             <div className={styles.questions__image}>
-              <img src={userInfo.user.avatarUrl.url} alt="avatar" />
+              <img src={user.avatarUrl.url} alt="avatar" />
             </div>
 
             <div className={styles.user__contact}>
               <div className={styles.user__email}>
-                <EmailIcon width={16} />
-                {userInfo.user.email}
+                <EmailIcon />
+                {user.email}
               </div>
-              <h2 className={styles.user__name}>@{userInfo.user.fullName}</h2>
+              <h2 className={styles.user__name}>@{user.fullName}</h2>
               <div className={styles.user__date}>
-                <DateIcon width={16} />
-                {new Date(userInfo.user.createdAt!).toLocaleDateString(
-                  "ru-RU",
-                  options
-                )}
+                <DateIcon />
+                {new Date(user.createdAt!).toLocaleDateString("ru-RU", options)}
               </div>
             </div>
           </div>
@@ -91,9 +73,7 @@ export const UserInfo = () => {
                 onClick={() => handlerSwitchCategory("tests")}
               >
                 Прохождение тестов{" "}
-                <span className={styles.user__circle}>
-                  {userInfo.data.allScore.length}
-                </span>
+                <span className={styles.user__circle}>{allScore.length}</span>
               </div>
               <div
                 className={
@@ -106,9 +86,7 @@ export const UserInfo = () => {
                 onClick={() => handlerSwitchCategory("publish")}
               >
                 Публикации{" "}
-                <span className={styles.user__circle}>
-                  {userInfo.data.allPublish.length}
-                </span>
+                <span className={styles.user__circle}>{allPublish.length}</span>
               </div>
               <div
                 className={
@@ -121,9 +99,7 @@ export const UserInfo = () => {
                 onClick={() => handlerSwitchCategory("likes")}
               >
                 Лайки{" "}
-                <span className={styles.user__circle}>
-                  {userInfo.data.allLikes.length}
-                </span>
+                <span className={styles.user__circle}>{allLikes.length}</span>
               </div>
               <div
                 className={
@@ -137,7 +113,7 @@ export const UserInfo = () => {
               >
                 Комментарии{" "}
                 <span className={styles.user__circle}>
-                  {userInfo.data.allComments.length}
+                  {allComments.length}
                 </span>
               </div>
             </div>
@@ -147,33 +123,13 @@ export const UserInfo = () => {
               {(() => {
                 switch (categoryType) {
                   case "tests":
-                    return (
-                      <TestSwitch
-                        user={userInfo.user}
-                        data={userInfo.data.allScore}
-                      />
-                    );
+                    return <TestSwitch user={user} data={allScore} />;
                   case "publish":
-                    return (
-                      <PublishSwitch
-                        user={userInfo.user}
-                        data={userInfo.data.allPublish}
-                      />
-                    );
+                    return <PublishSwitch user={user} data={allPublish} />;
                   case "likes":
-                    return (
-                      <LikesSwitch
-                        user={userInfo.user}
-                        data={userInfo.data.allLikes}
-                      />
-                    );
+                    return <LikesSwitch user={user} data={allLikes} />;
                   case "comments":
-                    return (
-                      <CommentSwitch
-                        user={userInfo.user}
-                        data={userInfo.data.allComments}
-                      />
-                    );
+                    return <CommentSwitch user={user} data={allComments} />;
                   default:
                     return null;
                 }
@@ -181,7 +137,11 @@ export const UserInfo = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <div>Error...</div>
       )}
     </div>
   );
 };
+
+export default UserInfo;
