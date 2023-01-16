@@ -1,39 +1,34 @@
-import { useContext, useId, useRef } from "react";
+import { useId, useRef } from "react";
 import styles from "./AddTestMain.module.scss";
 
-import { AddTestContextType, CategoryOption } from "propTypes";
+import { CategoryOption } from "propTypes";
 import Select from "react-select";
 
 import { categoryOptions } from "data";
 import axios from "axios";
-import { TestContext } from "pages/addTest/[id]";
+import useTestStore from "store/test";
 
 export const AddTestMain = () => {
-  const { data, onGetMainProps } = useContext(
-    TestContext
-  ) as AddTestContextType;
-
-  console.log(data);
+  const { data, onGetProps } = useTestStore();
 
   const isEmpty = Object.values(data.category).every((value) => Boolean(value));
   const inputFileRef = useRef<HTMLInputElement | null>(null);
 
   const onUploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      const file = event.target.files;
+      const file = event.target.files![0];
       const formData = new FormData();
-      formData.append("picture", file![0]);
+      formData.append("file", file);
+      formData.append("upload_preset", "portfolio_uploads");
 
       const newAvatarUrl = await axios.post(
-        "http://localhost:3000/api/upload",
+        "https://api.cloudinary.com/v1_1/dl4ooiriz/image/upload",
         formData
       );
 
-      console.log(newAvatarUrl);
-
       const { secure_url, public_id } = newAvatarUrl.data;
 
-      onGetMainProps({
+      onGetProps({
         ...data,
         bgImage: { public_id, url: secure_url },
       });
@@ -84,7 +79,7 @@ export const AddTestMain = () => {
           type="text"
           className={styles.inputField__field}
           placeholder="Введите название"
-          onChange={(e) => onGetMainProps({ ...data, title: e.target.value })}
+          onChange={(e) => onGetProps({ ...data, title: e.target.value })}
           defaultValue={data.title}
           required
         />
@@ -97,7 +92,7 @@ export const AddTestMain = () => {
           closeMenuOnSelect={false}
           options={categoryOptions}
           onChange={(option: CategoryOption | null) =>
-            onGetMainProps({ ...data, category: option! })
+            onGetProps({ ...data, category: option! })
           }
           value={isEmpty ? data.category : null}
           placeholder={"Выберите категорию"}
@@ -109,7 +104,7 @@ export const AddTestMain = () => {
 
       <textarea
         className={styles.addNote__text}
-        onChange={(e) => onGetMainProps({ ...data, text: e.target.value })}
+        onChange={(e) => onGetProps({ ...data, text: e.target.value })}
         placeholder="Описание"
         name="message"
         cols={30}

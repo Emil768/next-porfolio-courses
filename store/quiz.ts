@@ -1,9 +1,9 @@
-import axios from "utils/axios";
-import { CommentProps, TestProps } from "propTypes";
-import { AnswerStateProps } from "redux/slices";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { QuizStateProps } from "./types";
+import { AnswerStateProps, QuizStateProps } from "./types";
+
+import axios from "utils/axios";
+import { CommentProps, TestProps } from "propTypes";
 
 const useQuizStore = create<QuizStateProps>()(
   devtools(

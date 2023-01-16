@@ -1,6 +1,6 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 
-import { AddTestContextType, QuesLessProps } from "propTypes";
+import { QuesLessProps } from "propTypes";
 import { AnswerInfo, AnswerOfferInfo } from "components";
 
 import styles from "./QuestionBlock.module.scss";
@@ -8,19 +8,15 @@ import { RemoveIcon } from "public/icons";
 
 import axios from "axios";
 import ReactSwitch from "react-switch";
-import { TestContext } from "pages/addTest";
+import useTestStore from "store/test";
 
 interface QuestionBlockProps extends QuesLessProps {
   id: number;
 }
 
 export const QuestionBlock = ({ id, answers }: QuestionBlockProps) => {
-  const {
-    data,
-    currentQuestionIndex,
-    setCurrentQuestionIndex,
-    onGetMainProps,
-  } = useContext(TestContext) as AddTestContextType;
+  const { data, currentQuestionIndex, setPrevQuestion, onGetProps } =
+    useTestStore();
 
   const inputFileRef = useRef<HTMLInputElement | null>(null);
 
@@ -28,7 +24,7 @@ export const QuestionBlock = ({ id, answers }: QuestionBlockProps) => {
   const currentSwitch = currentQuestion.typeQuestion === "test" ? false : true;
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onGetMainProps({
+    onGetProps({
       ...data,
       questions: data.questions.map((item, index) =>
         index === id
@@ -44,7 +40,7 @@ export const QuestionBlock = ({ id, answers }: QuestionBlockProps) => {
   };
 
   const handlerAddAnswer = (id: number) => {
-    onGetMainProps({
+    onGetProps({
       ...data,
       questions: data.questions.map((item, index) =>
         index === id
@@ -63,7 +59,7 @@ export const QuestionBlock = ({ id, answers }: QuestionBlockProps) => {
   };
 
   const onChangeCorrect = () => {
-    onGetMainProps({
+    onGetProps({
       ...data,
       questions: data.questions.map(
         (item, index): QuesLessProps =>
@@ -86,26 +82,31 @@ export const QuestionBlock = ({ id, answers }: QuestionBlockProps) => {
   };
 
   const onRemoveCurrentQuestion = () => {
-    onGetMainProps({
-      ...data,
-      questions: data.questions.filter((item, index) =>
-        id !== 0
-          ? (setCurrentQuestionIndex(currentQuestionIndex - 1), index !== id)
-          : item
-      ),
-    });
+    if (id !== 0) {
+      onGetProps({
+        ...data,
+        questions: data.questions.filter((item, index) => index !== id),
+      });
+      setPrevQuestion();
+    }
   };
 
   const onUploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      const file = event.target.files;
+      const file = event.target.files![0];
       const formData = new FormData();
-      formData.append("picture", file![0]);
+      formData.append("file", file);
 
-      const newAvatarUrl = await axios.post("/uploads", formData);
+      formData.append("upload_preset", "portfolio_uploads");
+
+      const newAvatarUrl = await axios.post(
+        "https://api.cloudinary.com/v1_1/dl4ooiriz/image/upload",
+        formData
+      );
+
       const { secure_url, public_id } = newAvatarUrl.data;
 
-      onGetMainProps({
+      onGetProps({
         ...data,
         questions: data.questions.map((item, index) =>
           index === id

@@ -13,8 +13,11 @@ import { useEffect } from "react";
 import styles from "./FullTestBlock.module.scss";
 import useAuthStore from "store/auth";
 import useQuizStore from "store/quiz";
+import axios from "utils/axios";
+import { useRouter } from "next/router";
 
 export const FullTestBlock = ({ test }: { test: TestProps }) => {
+  const router = useRouter();
   const { data } = useAuthStore();
   const {
     fetchTest,
@@ -34,6 +37,8 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
   const isEditable = data?._id === test.user?._id;
   const currentQues = test.ques[currentQuesIndex];
 
+  // console.log(currentQues, currentQuesIndex);
+
   const isCurrentAnswer =
     currentAnswer.index !== null && currentAnswer.answer !== "";
 
@@ -50,12 +55,12 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
     }
   };
 
-  // const onRemoveTest = async () => {
-  //   if (window.confirm("Вы действительно хотите удалить тест?")) {
-  //     await axios.delete(`/tests/${currentQuiz._id}`);
-  //     // navigate("/");
-  //   }
-  // };
+  const onRemoveTest = async () => {
+    if (window.confirm("Вы действительно хотите удалить тест?")) {
+      await axios.delete(`/tests/${test._id}`);
+      router.push("/tests");
+    }
+  };
 
   return (
     <div className={styles.fullTest__content}>
@@ -66,7 +71,7 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
           <Link href={`/addTest/${test._id}`}>
             <EditIcon width={20} />
           </Link>
-          <RemoveIcon width={20} />
+          <RemoveIcon width={20} onClick={onRemoveTest} />
         </div>
       )}
 

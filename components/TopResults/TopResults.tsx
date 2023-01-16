@@ -5,8 +5,6 @@ import styles from "./TopResults.module.scss";
 import { ScoreProps } from "propTypes";
 import Link from "next/link";
 
-import { ClipLoader } from "react-spinners";
-
 export const TopResults = ({ testId }: { testId: string }) => {
   const fetcher = async () => {
     const { data } = await axios.get<ScoreProps[]>(`/getTopScore/${testId}`);
@@ -17,10 +15,10 @@ export const TopResults = ({ testId }: { testId: string }) => {
 
   return (
     <div className={styles.topResults} data-testid="TopResults">
-      <div className={styles.topResults__content}>
-        <h3 className={styles.topResults__title}>Топ прохождений🔥</h3>
+      {data && data.length !== 0 ? (
+        <div className={styles.topResults__content}>
+          <h3 className={styles.topResults__title}>Топ прохождений🔥</h3>
 
-        {data ? (
           <div className={styles.topResulst__chart}>
             {data.slice(-3).map((item) => (
               <ul className={styles.topResults__list} key={item._id}>
@@ -41,10 +39,8 @@ export const TopResults = ({ testId }: { testId: string }) => {
               </ul>
             ))}
           </div>
-        ) : (
-          <ClipLoader loading={data} color="#39ca81" />
-        )}
-      </div>
+        </div>
+      ) : null}
     </div>
   );
 };

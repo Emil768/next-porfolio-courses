@@ -1,4 +1,4 @@
-import { LoginProps, TestProps, UserProps } from "propTypes";
+import { LoginProps, MainAddTestProps, TestProps, UserProps } from "propTypes";
 
 export type AnswerStateProps = { index: number | null; answer?: string };
 export type CommentPropsCreate = { testId: string; text: string };
@@ -14,7 +14,7 @@ export type CommentPropsRemove = {
 };
 
 export type AuthStateProps = {
-  data: UserProps;
+  data: UserProps | null;
   status: "loading" | "loaded" | "error";
   fetchAuth: (values: LoginProps) => Promise<UserProps>;
   fetchAuthRegister: (values: UserProps) => Promise<UserProps>;
@@ -38,9 +38,11 @@ export type QuizStateProps = {
 };
 
 export type TestStateProps = {
-  tests: TestProps[];
-  status: "loading" | "loaded" | "error";
-  fetchTests: (data: TestProps[]) => void;
-  fetchAddLike: (id: string) => void;
-  fetchRemoveLike: (id: string) => void;
+  data: MainAddTestProps;
+  currentQuestionIndex: number;
+  onGetProps: ({ title, category, text, bgImage }: MainAddTestProps) => void;
+  clearState: () => void;
+  setNextQuestion: () => void;
+  setPrevQuestion: () => void;
+  addQuestion: () => void;
 };

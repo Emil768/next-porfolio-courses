@@ -9,6 +9,8 @@ import Link from "next/link";
 
 import useAuthStore from "store/auth";
 import useQuizStore from "store/quiz";
+import { useRouter } from "next/router";
+import axios from "utils/axios";
 
 interface CommentsBlockProps extends CommentProps {
   onReplyComment: (name: string) => void;
@@ -22,6 +24,7 @@ export const CommentsBlock = ({
   _id,
   onReplyComment,
 }: CommentsBlockProps) => {
+  const router = useRouter();
   const [isEdit, setIsEdit] = useState(true);
   const { data } = useAuthStore();
   const { fetchRemoveComment, fetchUpdateComment } = useQuizStore();
@@ -33,12 +36,31 @@ export const CommentsBlock = ({
   };
 
   const handlerOnEditComment = async () => {
-    fetchUpdateComment({ id: _id, testId, text: textComment.current });
-
-    setIsEdit(true);
+    try {
+      const { data } = await axios.post<CommentProps[]>(
+        `/comments/edit/${_id}`,
+        {
+          testId,
+          text,
+        }
+      );
+      router.push({ pathname: router.asPath }, undefined, { scroll: false });
+      setIsEdit(true);
+    } catch (err) {
+      alert("Не удалось обновить комментарий");
+    }
   };
 
-  const handlerOnRemoveComment = () => fetchRemoveComment({ id: _id, testId });
+  const handlerOnRemoveComment = async () => {
+    try {
+      const { data } = await axios.post<CommentProps[]>(`/comments/${_id}`, {
+        testId,
+      });
+      router.push({ pathname: router.asPath }, undefined, { scroll: false });
+    } catch (err) {
+      alert("Не удалось удалить комментарий");
+    }
+  };
 
   const handlerOnReplyComment = (name: string) => {
     onReplyComment(name);

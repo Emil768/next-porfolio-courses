@@ -28,7 +28,7 @@ const FullTest = ({ test }: { test: TestProps }) => {
           <FullTestBlock test={test} />
           <div className={styles.fullTest__info}>
             <TopResults testId={test._id} />
-            <Comments />
+            <Comments {...test} />
           </div>
         </>
       ) : (

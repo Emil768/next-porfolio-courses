@@ -12,11 +12,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import useAuthStore from "store/auth";
+import { useEffect } from "react";
 
 const Registration = () => {
-  // const isLoading = Boolean(status === "loading");
-  const { fetchAuthRegister } = useAuthStore();
   const router = useRouter();
+  const { data, fetchAuthRegister, status } = useAuthStore();
+  const isLoading = Boolean(status === "loading");
 
   const {
     register,
@@ -36,11 +37,13 @@ const Registration = () => {
   const onSubmit = async ({ fullName, email, password, avatarUrl }: any) => {
     try {
       const formData = new FormData();
-      formData.append("picture", avatarUrl[0]);
+      formData.append("file", avatarUrl[0]);
+      formData.append("upload_preset", "avatars_uploads");
+      const newAvatarUrl = await axios.post(
+        "https://api.cloudinary.com/v1_1/dl4ooiriz/image/upload",
+        formData
+      );
 
-      const newAvatarUrl = await axios.post("/uploads", formData);
-
-      console.log(newAvatarUrl);
       const { secure_url, public_id } = newAvatarUrl.data;
 
       const fields: UserProps = {
@@ -54,7 +57,7 @@ const Registration = () => {
       };
 
       const data = await fetchAuthRegister(fields);
-      console.log(data);
+
       if (!data) {
         return window.alert("Не удалось зарегистрироваться!");
       }
@@ -68,18 +71,20 @@ const Registration = () => {
     }
   };
 
-  // if (data) {
-  //   return router.push("/");
-  // }
+  useEffect(() => {
+    if (data) {
+      router.push("/");
+    }
+  }, [data]);
 
   return (
     <div className={styles.registration} data-testid="Login">
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.form__content}>
           <h2 className={styles.form__title}>Регистрация</h2>
-          {/* <div className={styles.form__loading}>
+          <div className={styles.form__loading}>
             <ClipLoader loading={isLoading} color="#39ca81" />
-          </div> */}
+          </div>
           <div className={styles.form__inputs}>
             <div className={styles.form__input}>
               <input

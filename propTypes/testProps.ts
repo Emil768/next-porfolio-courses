@@ -108,5 +108,4 @@ export type AddTestContextType = {
     bgImage,
   }: MainAddTestProps) => void;
   currentQuestionIndex: number;
-  setCurrentQuestionIndex: React.Dispatch<React.SetStateAction<number>>;
 };

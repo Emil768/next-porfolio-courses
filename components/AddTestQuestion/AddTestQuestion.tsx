@@ -1,25 +1,18 @@
-import { useContext } from "react";
-import { AddTestContextType } from "propTypes";
 import { QuestionBlock } from "components";
 import styles from "./AddTestQuestion.module.scss";
 
 import { ArrowIcon } from "public/icons";
-import { TestContext } from "pages/addTest";
+import useTestStore from "store/test";
 
 export const AddTestQuestion = () => {
-  const { data, setCurrentQuestionIndex, currentQuestionIndex } = useContext(
-    TestContext
-  ) as AddTestContextType;
+  const { data, setNextQuestion, setPrevQuestion, currentQuestionIndex } =
+    useTestStore();
 
   const handlerNextQuestion = () =>
-    currentQuestionIndex !== data.questions.length
-      ? setCurrentQuestionIndex(currentQuestionIndex + 1)
-      : null;
+    currentQuestionIndex !== data.questions.length ? setNextQuestion() : null;
 
   const handlerPrevQuestion = () =>
-    currentQuestionIndex !== 1
-      ? setCurrentQuestionIndex(currentQuestionIndex - 1)
-      : null;
+    currentQuestionIndex !== 1 ? setPrevQuestion() : null;
 
   return (
     <div className={styles.addNote__tests} data-testid="AddTestQuestion">

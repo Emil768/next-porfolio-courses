@@ -5,14 +5,21 @@ import { Test, Categories, SortPopup, EmptyBlock } from "components";
 import { GetServerSideProps } from "next/types";
 
 import axios from "utils/axios";
+import { useRouter } from "next/router";
 import { TestProps } from "propTypes";
-import { useEffect } from "react";
-import useTestsStore from "store/tests";
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
-    const { data } = await axios.get<TestProps[]>("/tests");
+    console.log(context.query);
+    if (context.query.sort) {
+      const { data } = await axios.get(`/sort/${context.query.sort}`);
 
+      return {
+        props: { tests: data },
+      };
+    }
+
+    const { data } = await axios.get<TestProps[]>("/tests");
     return {
       props: { tests: data },
     };

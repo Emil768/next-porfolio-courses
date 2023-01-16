@@ -28,7 +28,11 @@ export const Popup = ({ active, items, activeLabel }: PopupProps) => {
               key={index}
               onClick={() =>
                 item.onClickPopup &&
-                item.onClickPopup({ name: item.name, type: item.type! })!
+                item.onClickPopup({
+                  name: item.name,
+                  type: item.type!,
+                  order: item.order!,
+                })
               }
             >
               {item.name}

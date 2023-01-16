@@ -1,12 +1,14 @@
 import axios from "utils/axios";
 import { useRouter } from "next/dist/client/router";
 import { createContext, useEffect, useState } from "react";
-import { AddTestContextType, MainAddTestProps, TestProps } from "propTypes";
+import { AddTestContextType, TestProps } from "propTypes";
 
 import styles from "styles/AddTest.module.scss";
 
 import Link from "next/link";
 import { AddTestMain, AddTestQuestion } from "components";
+import useTestStore from "store/test";
+import useAuthStore from "store/auth";
 
 export const TestContext = createContext<AddTestContextType | null>(null);
 
@@ -14,32 +16,15 @@ const newTest = () => {
   const router = useRouter();
   const { id } = router.query;
   const [isToggleNav, setIsToggleNav] = useState(true);
-  const [data, setData] = useState<MainAddTestProps>({
-    title: "",
-    category: { label: "", value: "" },
-    bgImage: { public_id: "", url: "" },
-    text: "",
-    questions: [
-      {
-        title: "",
-        imageURL: { public_id: "", url: "" },
-        answers: [
-          { answer: "", correct: false },
-          { answer: "", correct: false },
-          { answer: "", correct: false },
-        ],
-        typeQuestion: "test",
-      },
-    ],
-  });
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1);
+  const { data, onGetProps, addQuestion, clearState } = useTestStore();
+  const user = useAuthStore((state) => state.data);
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get<TestProps>(`/tests/${id}`);
 
-      setData({
+      onGetProps({
         title: data.title,
         text: data.text,
         category: data.category,
@@ -48,8 +33,10 @@ const newTest = () => {
       });
     };
 
-    if (id) {
+    if (id && user) {
       fetchData();
+    } else {
+      router.push("/");
     }
   }, [id]);
 
@@ -66,49 +53,14 @@ const newTest = () => {
 
     try {
       const { data } = await axios.patch(`/tests/${id}`, fields);
-
+      clearState();
       router.push(`/tests/${id}`);
     } catch (err) {
       alert("Не удалось создать тест");
     }
   };
 
-  const handlerAddQuestion = () => {
-    setData({
-      ...data,
-      questions: [
-        ...data.questions,
-        {
-          title: "",
-          imageURL: { public_id: "", url: "" },
-          answers: [
-            { answer: "", correct: false },
-            { answer: "", correct: false },
-            { answer: "", correct: false },
-          ],
-          typeQuestion: "test",
-        },
-      ],
-    });
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-  };
-
-  const onGetMainProps = ({
-    title,
-    text,
-    category,
-    bgImage,
-    questions,
-  }: MainAddTestProps) =>
-    setData({
-      title,
-      text,
-      category,
-      bgImage,
-      questions,
-    });
-
-  console.log(data);
+  const handlerAddQuestion = () => addQuestion();
 
   return (
     <form className={styles.addNote} onSubmit={onSubmit}>
@@ -138,18 +90,8 @@ const newTest = () => {
           </ul>
         </div>
 
-        {Object.keys(data).length !== 0 && (
-          <TestContext.Provider
-            value={{
-              data,
-              currentQuestionIndex,
-              setCurrentQuestionIndex,
-              onGetMainProps,
-            }}
-          >
-            {isToggleNav ? <AddTestMain /> : <AddTestQuestion />}
-          </TestContext.Provider>
-        )}
+        {Object.keys(data).length !== 0 &&
+          (isToggleNav ? <AddTestMain /> : <AddTestQuestion />)}
 
         <div className={styles.addNote__buttons}>
           <button className={styles.addNote__confirm} type="submit">
@@ -164,7 +106,7 @@ const newTest = () => {
               Добавить вопрос
             </button>
           ) : null}
-          <Link href={"/"} className={styles.addNote__cancel}>
+          <Link href={`/tests/${id}`} className={styles.addNote__cancel}>
             Отмена
           </Link>
         </div>

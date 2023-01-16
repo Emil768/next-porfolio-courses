@@ -1,45 +1,19 @@
-import { useState, createContext, useEffect } from "react";
-// import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import styles from "styles/AddTest.module.scss";
-
-import { AddTestContextType, MainAddTestProps, TestProps } from "propTypes";
-
-import { useAppSelector } from "redux/hooks";
+import { TestProps } from "propTypes";
 import { AddTestMain, AddTestQuestion } from "components";
-
 import { useRouter } from "next/dist/client/router";
-import Link from "next/link";
 
-import axios from "axios";
+import axios from "utils/axios";
 import useAuthStore from "store/auth";
-
-export const TestContext = createContext<AddTestContextType | null>(null);
+import useTestStore from "store/test";
 
 const AddTest = () => {
+  const router = useRouter();
+  const { data, addQuestion, clearState } = useTestStore();
   const user = useAuthStore((state) => state.data);
 
-  const router = useRouter();
-
   const [isToggleNav, setIsToggleNav] = useState(true);
-  const [data, setData] = useState<MainAddTestProps>({
-    title: "",
-    category: { label: "", value: "" },
-    bgImage: { public_id: "", url: "" },
-    text: "",
-    questions: [
-      {
-        title: "",
-        imageURL: { public_id: "", url: "" },
-        answers: [
-          { answer: "", correct: false },
-          { answer: "", correct: false },
-          { answer: "", correct: false },
-        ],
-        typeQuestion: "test",
-      },
-    ],
-  });
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,51 +28,26 @@ const AddTest = () => {
 
     try {
       const { data } = await axios.post<TestProps>("/tests", fields);
-      console.log(data);
+      clearState();
       router.push(`/tests/${data._id}`);
     } catch (err) {
       alert("Не удалось создать тест");
     }
   };
 
-  const handlerAddQuestion = () => {
-    setData({
-      ...data,
-      questions: [
-        ...data.questions,
-        {
-          title: "",
-          imageURL: { public_id: "", url: "" },
-          answers: [
-            { answer: "", correct: false },
-            { answer: "", correct: false },
-            { answer: "", correct: false },
-          ],
-          typeQuestion: "test",
-        },
-      ],
-    });
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
+  const handlerAddQuestion = () => addQuestion();
+  const handlerCancelQuestion = () => {
+    clearState();
+    router.push("/tests");
   };
 
-  const onGetMainProps = ({
-    title,
-    text,
-    category,
-    bgImage,
-    questions,
-  }: MainAddTestProps) =>
-    setData({
-      title,
-      text,
-      category,
-      bgImage,
-      questions,
-    });
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
 
-  // if (!window.localStorage.getItem("token") && !isAuth) {
-  //   return <Navigate to={"/"} />;
-  // }
+    clearState();
+  }, []);
 
   return (
     <form className={styles.addNote} onSubmit={onSubmit}>
@@ -128,20 +77,10 @@ const AddTest = () => {
           </ul>
         </div>
 
-        <TestContext.Provider
-          value={{
-            data,
-            currentQuestionIndex,
-            setCurrentQuestionIndex,
-            onGetMainProps,
-          }}
-        >
-          {isToggleNav ? <AddTestMain /> : <AddTestQuestion />}
-        </TestContext.Provider>
+        {isToggleNav ? <AddTestMain /> : <AddTestQuestion />}
 
         <div className={styles.addNote__buttons}>
           <button className={styles.addNote__confirm} type="submit">
-            {/* {isEditable ? "Сохранить" : "Опубликовать"} */}
             Опубликовать
           </button>
           {!isToggleNav ? (
@@ -153,9 +92,13 @@ const AddTest = () => {
               Добавить вопрос
             </button>
           ) : null}
-          <Link href={"/"} className={styles.addNote__cancel}>
+          <button
+            type="button"
+            className={styles.addNote__cancel}
+            onClick={handlerCancelQuestion}
+          >
             Отмена
-          </Link>
+          </button>
         </div>
       </div>
     </form>

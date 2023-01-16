@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AddTestContextType, QuesLessProps } from "propTypes";
 import styles from "./AnswerOfferInfo.module.scss";
-import { TestContext } from "pages/addTest";
+import useTestStore from "store/test";
 
 interface AnswerOfferInfoProps {
   id: number;
@@ -9,9 +9,7 @@ interface AnswerOfferInfoProps {
 }
 
 export const AnswerOfferInfo = ({ id, idQuestion }: AnswerOfferInfoProps) => {
-  const { data, onGetMainProps } = useContext(
-    TestContext
-  ) as AddTestContextType;
+  const { data, onGetProps } = useTestStore();
 
   const currentAnswer = data.questions[idQuestion].answers[id];
 
@@ -34,7 +32,7 @@ export const AnswerOfferInfo = ({ id, idQuestion }: AnswerOfferInfoProps) => {
       return item;
     });
 
-    onGetMainProps({ ...data, questions: nextState });
+    onGetProps({ ...data, questions: nextState });
   };
 
   return (

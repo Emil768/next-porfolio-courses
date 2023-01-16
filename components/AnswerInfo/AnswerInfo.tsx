@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import styles from "./AnswerInfo.module.scss";
 import ReactSwitch from "react-switch";
 import { CloseIcon } from "public/icons";
-import { AddTestContextType, QuesLessProps } from "propTypes";
-import { TestContext } from "pages/addTest";
+import { QuesLessProps } from "propTypes";
+import useTestStore from "store/test";
 
 interface AnswerInfoProps {
   id: number;
@@ -11,15 +10,11 @@ interface AnswerInfoProps {
 }
 
 export const AnswerInfo = ({ id, idQuestion }: AnswerInfoProps) => {
-  const { data, onGetMainProps } = useContext(
-    TestContext
-  ) as AddTestContextType;
-
+  const { data, onGetProps } = useTestStore();
   const currentAnswer = data.questions[idQuestion].answers[id];
-  console.log(currentAnswer);
 
   const onChangeAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onGetMainProps({
+    onGetProps({
       ...data,
       questions: data.questions.map(
         (item, index): QuesLessProps =>
@@ -41,7 +36,7 @@ export const AnswerInfo = ({ id, idQuestion }: AnswerInfoProps) => {
   };
 
   const onChangeCorrect = () => {
-    onGetMainProps({
+    onGetProps({
       ...data,
       questions: data.questions.map(
         (item, index): QuesLessProps =>
@@ -63,23 +58,24 @@ export const AnswerInfo = ({ id, idQuestion }: AnswerInfoProps) => {
   };
 
   const onRemoveAnswer = () => {
-    const nextState = data.questions.map((item, index): QuesLessProps => {
-      if (index === idQuestion) {
-        if (item.answers.length !== 1) {
-          item.answers.splice(id, 1);
-          return {
-            title: item.title,
-            imageURL: item.imageURL,
-            answers: [...item.answers],
-            typeQuestion: "test",
-          };
+    onGetProps({
+      ...data,
+      questions: data.questions.map((item, index): QuesLessProps => {
+        if (index === idQuestion) {
+          if (id !== 0) {
+            item.answers.splice(id, 1);
+            return {
+              title: item.title,
+              imageURL: item.imageURL,
+              answers: [...item.answers],
+              typeQuestion: "test",
+            };
+          }
         }
-      }
 
-      return item;
+        return item;
+      }),
     });
-
-    onGetMainProps({ ...data, questions: nextState });
   };
 
   return (

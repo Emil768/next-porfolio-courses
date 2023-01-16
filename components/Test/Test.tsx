@@ -20,21 +20,17 @@ export const Test = ({
   const { data } = useAuthStore();
   const checkTestId = likes.find((item) => item.likeBy._id === data?._id);
 
-  const refreshData = () => {
-    router.replace(router.asPath);
-  };
-
   const onLikeTest = async () => {
     await axios.patch<TestProps>("/like", {
       testId: _id,
     });
-    refreshData();
+    router.push({ pathname: router.asPath }, undefined, { scroll: false });
   };
   const onUnlikeTest = async () => {
     await axios.patch<TestProps>("/unlike", {
       testId: _id,
     });
-    refreshData();
+    router.push({ pathname: router.asPath }, undefined, { scroll: false });
   };
 
   return (

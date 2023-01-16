@@ -7,7 +7,7 @@ import { AuthStateProps } from "./types";
 const useAuthStore = create<AuthStateProps>()(
   devtools(
     (set) => ({
-      data: {} as UserProps,
+      data: null,
       status: "loading",
       fetchAuth: async (values) => {
         try {
@@ -30,11 +30,11 @@ const useAuthStore = create<AuthStateProps>()(
           set({ data, status: "loaded" });
           return data;
         } catch (err) {
-          set({ data: {} as UserProps, status: "error" });
+          set({ data: null, status: "error" });
         }
       },
       logout: () => {
-        set({ data: {} as UserProps, status: "loading" });
+        set({ data: null, status: "loading" });
       },
     }),
     { name: "auth" }

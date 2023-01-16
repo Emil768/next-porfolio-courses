@@ -4,11 +4,12 @@ export interface PopupProps {
   active: Boolean;
 }
 
-export type PopupActiveProps = { name: string; type: string };
+export type PopupActiveProps = { name: string; type: string; order: string };
 
 export type PopupItems = {
   name: string;
+  order?: string;
   type?: string;
   link?: String;
-  onClickPopup?: ({ name, type }: PopupActiveProps) => void;
+  onClickPopup?: ({ name, type, order }: PopupActiveProps) => void;
 };
