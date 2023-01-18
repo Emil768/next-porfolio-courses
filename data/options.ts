@@ -1,4 +1,4 @@
-import { CategoryOption } from "@proptypes";
+import { CategoryOption } from "propTypes";
 import {
   SliceIcon_1,
   SliceIcon_2,
