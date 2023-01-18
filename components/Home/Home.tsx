@@ -21,7 +21,7 @@ export const Home = () => {
             учителем-билингвой
           </p>
           <q className={styles.home__quote}>
-            Enjoy English u know, discover English u don't.
+            Enjoy English u know, discover English u don&apos;t.
           </q>
           <Link className={styles.home__button} href={"/tariffs"}>
             Записаться
