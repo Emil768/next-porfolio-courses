@@ -24,13 +24,17 @@ export const Test = ({
     await axios.patch<TestProps>("/like", {
       testId: _id,
     });
-    router.push({ pathname: router.asPath }, undefined, { scroll: false });
+    router.replace({ pathname: "/tests" }, `/tests?sort=${router.query.date}`, {
+      scroll: false,
+    });
   };
   const onUnlikeTest = async () => {
     await axios.patch<TestProps>("/unlike", {
       testId: _id,
     });
-    router.push({ pathname: router.asPath }, undefined, { scroll: false });
+    router.replace({ pathname: router.asPath }, undefined, {
+      scroll: false,
+    });
   };
 
   return (

@@ -9,12 +9,6 @@ import { TestProps } from "propTypes";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
-    if (context.query.sort) {
-      const { data } = await axios.get(`/sort/${context.query.sort}`);
-      return {
-        props: { tests: data },
-      };
-    }
     const { title } = context.params!;
     const { data } = await axios.get<TestProps[]>(`/category/${title}`);
 

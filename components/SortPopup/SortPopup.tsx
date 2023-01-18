@@ -20,14 +20,15 @@ export const SortPopup = () => {
       type: "views",
       order: "desc",
       onClickPopup({ name, type, order }: PopupActiveProps) {
-        router.push(
-          {
-            pathname: `/${router.asPath}/?sort=${type}`,
-            query: { sort: type },
-          },
-          `/${router.asPath}/?sort=${type}`,
-          { shallow: true }
-        );
+        // router.push(
+        //   {
+        //     pathname: "/tests",
+        //     query: { sort: type },
+        //   },
+        //   `/tests?sort=${type}`,
+        //   { shallow: false }
+        // );
+
         setActiveType({ name, type, order });
       },
     },
@@ -35,14 +36,14 @@ export const SortPopup = () => {
       name: "дате ",
       type: "date",
       onClickPopup({ name, type, order }: PopupActiveProps) {
-        router.push(
-          {
-            pathname: `/${router.asPath}/?sort=${type}`,
-            query: { sort: type, order },
-          },
-          `/${router.asPath}/?sort=${type}`,
-          { shallow: true }
-        );
+        // router.push(
+        //   {
+        //     pathname: "/tests",
+        //     query: { sort: type },
+        //   },
+        //   `/tests?sort=${type}`,
+        //   { shallow: false }
+        // );
         setActiveType({ name, type, order });
       },
     },
@@ -50,20 +51,19 @@ export const SortPopup = () => {
       name: "лайкам",
       type: "likes",
       onClickPopup({ name, type, order }: PopupActiveProps) {
-        router.push(
-          {
-            pathname: `/${router.asPath}/?sort=${type}`,
-            query: { sort: type, order },
-          },
-          `/${router.asPath}/?sort=${type}`,
-          { shallow: true }
-        );
+        // router.push(
+        //   {
+        //     pathname: "/tests",
+        //     query: { sort: type },
+        //   },
+        //   "/tests",
+        //   { shallow: false }
+        // );
+
         setActiveType({ name, type, order });
       },
     },
   ];
-
-  console.log(router.asPath);
 
   return (
     <div className={styles.notes__sorted}>

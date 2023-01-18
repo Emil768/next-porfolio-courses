@@ -12,7 +12,7 @@ import useAuthStore from "store/auth";
 
 export const TestContext = createContext<AddTestContextType | null>(null);
 
-const newTest = () => {
+const ChangeTest = () => {
   const router = useRouter();
   const { id } = router.query;
   const [isToggleNav, setIsToggleNav] = useState(true);
@@ -115,4 +115,4 @@ const newTest = () => {
   );
 };
 
-export default newTest;
+export default ChangeTest;
