@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { CommentProps, UserProps } from "propTypes";
+import { CommentProps } from "propTypes";
 import styles from "./CommentsBlock.module.scss";
 
 import { EditIcon, RemoveIcon, ReplyIcon, SuccessIcon } from "public/icons";
@@ -8,7 +8,7 @@ import ContentEditable from "react-contenteditable";
 import Link from "next/link";
 
 import useAuthStore from "store/auth";
-import useQuizStore from "store/quiz";
+
 import { useRouter } from "next/router";
 import axios from "utils/axios";
 import Image from "next/legacy/image";
@@ -28,7 +28,6 @@ export const CommentsBlock = ({
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(true);
   const { data } = useAuthStore();
-  const { fetchRemoveComment, fetchUpdateComment } = useQuizStore();
 
   const textComment = useRef(text);
 

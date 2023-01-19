@@ -5,7 +5,6 @@ import styles from "./Comments.module.scss";
 import { CommentsBlock } from "components";
 import Link from "next/link";
 
-import useQuizStore from "store/quiz";
 import useAuthStore from "store/auth";
 import { CommentProps, TestProps } from "propTypes";
 import { useRouter } from "next/router";
