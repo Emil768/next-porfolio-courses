@@ -18,48 +18,48 @@ export const SortPopup = () => {
     {
       name: "популярности",
       type: "views",
-      order: "desc",
+      order: "asc",
       onClickPopup({ name, type, order }: PopupActiveProps) {
-        // router.push(
-        //   {
-        //     pathname: "/tests",
-        //     query: { sort: type },
-        //   },
-        //   `/tests?sort=${type}`,
-        //   { shallow: false }
-        // );
-
+        router.push(
+          {
+            pathname: "/tests",
+            query: { sort: type, order },
+          },
+          `/tests?sort=${type}&order=${order}`,
+          { shallow: false }
+        );
         setActiveType({ name, type, order });
       },
     },
     {
       name: "дате ",
       type: "date",
+      order: "asc",
       onClickPopup({ name, type, order }: PopupActiveProps) {
-        // router.push(
-        //   {
-        //     pathname: "/tests",
-        //     query: { sort: type },
-        //   },
-        //   `/tests?sort=${type}`,
-        //   { shallow: false }
-        // );
+        router.push(
+          {
+            pathname: "/tests",
+            query: { sort: type, order },
+          },
+          `/tests?sort=${type}&order=${order}`,
+          { shallow: false }
+        );
         setActiveType({ name, type, order });
       },
     },
     {
       name: "лайкам",
       type: "likes",
+      order: "asc",
       onClickPopup({ name, type, order }: PopupActiveProps) {
-        // router.push(
-        //   {
-        //     pathname: "/tests",
-        //     query: { sort: type },
-        //   },
-        //   "/tests",
-        //   { shallow: false }
-        // );
-
+        router.push(
+          {
+            pathname: "/tests",
+            query: { sort: type, order },
+          },
+          `/tests?sort=${type}&order=${order}`,
+          { shallow: false }
+        );
         setActiveType({ name, type, order });
       },
     },

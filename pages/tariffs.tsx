@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import styles from "../styles/Tariffs.module.scss";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Head from "next/head";
 
 const Tariffs = () => {
   useEffect(() => {
@@ -10,6 +11,25 @@ const Tariffs = () => {
   }, []);
   return (
     <section className={styles.tariffs}>
+      <Head>
+        <title>Тарифы Extra school</title>
+        <meta
+          name="description"
+          content="Если ты устал от занудных школьных объяснений, хочешь ярких, понятных примеров, а также избавиться от комплексов и заговорить на английском – тебе понравится этот курс. Выберите подходящий тарифный план, чтобы начать обучаться!"
+        />
+        <meta property="og:title" content="Тарифы Extra school" />
+        <meta
+          property="og:description"
+          content="Если ты устал от занудных школьных объяснений, хочешь ярких, понятных примеров, а также избавиться от комплексов и заговорить на английском – тебе понравится этот курс. Выберите подходящий тарифный план, чтобы начать обучаться!"
+        />
+        <meta
+          property="og:image"
+          content={
+            "https://res.cloudinary.com/dl4ooiriz/image/upload/v1672837860/checklists_cover_m1f4zm.png"
+          }
+        />
+        <meta property="og:type" content="website" />
+      </Head>
       <div className={styles.tariffs__content}>
         <h1
           className={[styles.tariffs__title, styles.title].join(" ")}

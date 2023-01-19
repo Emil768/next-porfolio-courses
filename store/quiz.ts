@@ -2,8 +2,7 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { AnswerStateProps, QuizStateProps } from "./types";
 
-import axios from "utils/axios";
-import { CommentProps, TestProps } from "propTypes";
+import { TestProps } from "propTypes";
 
 const useQuizStore = create<QuizStateProps>()(
   devtools(
@@ -50,53 +49,6 @@ const useQuizStore = create<QuizStateProps>()(
         set({ currentAnswer: answer }),
 
       setShowScore: () => set({ showScore: true }),
-
-      //comments
-
-      fetchAddComment: async ({ testId, text }) => {
-        try {
-          const { data } = await axios.post<CommentProps>(`/comments`, {
-            text,
-            testId,
-          });
-
-          set((state) => ({
-            quiz: { ...state.quiz, comments: [...state.quiz.comments, data] },
-          }));
-        } catch (err) {
-          set({ status: "error" });
-        }
-      },
-      fetchUpdateComment: async ({ id, testId, text }) => {
-        try {
-          const { data } = await axios.post<CommentProps[]>(
-            `/comments/edit/${id}`,
-            {
-              testId,
-              text,
-            }
-          );
-
-          set((state) => ({
-            quiz: { ...state.quiz, comments: data },
-          }));
-        } catch (err) {
-          set({ status: "error" });
-        }
-      },
-      fetchRemoveComment: async ({ id, testId }) => {
-        try {
-          const { data } = await axios.post<CommentProps[]>(`/comments/${id}`, {
-            testId,
-          });
-
-          set((state) => ({
-            quiz: { ...state.quiz, comments: data },
-          }));
-        } catch (err) {
-          set({ status: "error" });
-        }
-      },
     }),
     { name: "quiz" }
   )

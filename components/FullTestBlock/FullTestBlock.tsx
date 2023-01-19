@@ -15,6 +15,7 @@ import useAuthStore from "store/auth";
 import useQuizStore from "store/quiz";
 import axios from "utils/axios";
 import { useRouter } from "next/router";
+import Image from "next/legacy/image";
 
 export const FullTestBlock = ({ test }: { test: TestProps }) => {
   const router = useRouter();
@@ -35,7 +36,7 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
   }, [test]);
 
   const isEditable = data?._id === test.user?._id;
-  const currentQues = test.ques[currentQuesIndex];
+  const currentQues = test && test.ques[currentQuesIndex];
 
   // console.log(currentQues, currentQuesIndex);
 
@@ -82,7 +83,13 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
         <div className={styles.questions}>
           {currentQues.imageURL?.url ? (
             <div className={styles.questions__image}>
-              <img src={currentQues.imageURL?.url} alt="" />
+              <Image
+                width={700}
+                height={300}
+                layout="responsive"
+                src={currentQues.imageURL?.url}
+                alt="question background"
+              />
             </div>
           ) : null}
           <div

@@ -4,6 +4,7 @@ import { Comments, TopResults, FullTestBlock } from "components";
 import axios from "utils/axios";
 import { TestProps } from "propTypes";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
@@ -23,11 +24,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const FullTest = ({ test }: { test: TestProps }) => {
   return (
     <main className={styles.fullTest}>
+      <Head>
+        <title>{`${test.title} - Extra school`}</title>
+        <meta name="description" content={`${test.text}`} />
+        <meta property="og:title" content={`${test.title} - Extra school`} />
+        <meta property="og:description" content={`${test.text}`} />
+        <meta
+          property="og:image"
+          content={
+            "https://res.cloudinary.com/dl4ooiriz/image/upload/v1672837860/checklists_cover_m1f4zm.png"
+          }
+        />
+        <meta property="og:type" content="article" />
+      </Head>
+
       {Object.keys(test).length !== 0 ? (
         <>
           <FullTestBlock test={test} />
           <div className={styles.fullTest__info}>
-            <TopResults testId={test._id} />
+            {test.score.length !== 0 && <TopResults testId={test._id} />}
             <Comments {...test} />
           </div>
         </>

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import useAuthStore from "store/auth";
+import Image from "next/image";
 
 export const Header = () => {
   const router = useRouter();
@@ -17,7 +18,15 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={styles.header__content}>
         <Link href={"/"}>
-          <img src={LogoIcon.src} className={styles.header__logo} alt="logo" />
+          <Image
+            src={LogoIcon.src}
+            className={styles.header__logo}
+            width={100}
+            height={74}
+            unoptimized={true}
+            priority={true}
+            alt="logo"
+          />
         </Link>
         <div className={styles.header__panel}>
           <div

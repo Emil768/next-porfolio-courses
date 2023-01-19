@@ -11,6 +11,7 @@ import useAuthStore from "store/auth";
 import useQuizStore from "store/quiz";
 import { useRouter } from "next/router";
 import axios from "utils/axios";
+import Image from "next/legacy/image";
 
 interface CommentsBlockProps extends CommentProps {
   onReplyComment: (name: string) => void;
@@ -69,7 +70,13 @@ export const CommentsBlock = ({
   return (
     <div className={styles.comments__block}>
       <div className={styles.comments__avatar}>
-        <img src={postedBy.avatarUrl.url} alt="avatar" />
+        <Image
+          width={50}
+          height={50}
+          quality={100}
+          src={postedBy.avatarUrl.url}
+          alt="avatar user"
+        />
       </div>
       <div className={styles.comments__info}>
         <div className={styles.comments__infoTop}>

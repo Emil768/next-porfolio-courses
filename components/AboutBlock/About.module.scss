@@ -39,12 +39,12 @@
   &__author {
     -webkit-box-flex: 30%;
     -ms-flex: 30% 0 0px;
-    flex: 30% 0 0;
+    flex: 0 0 30%;
     position: relative;
   }
 
   &__authorImage {
-    max-width: 100%;
+    object-fit: contain;
   }
 
   &__certificates {
@@ -59,22 +59,27 @@
   &__certificatesCenter,
   &__certificatesRight {
     position: absolute;
+    height: 475px;
   }
 
   &__certificates img {
     max-width: 100%;
+    width: 100%;
   }
 
   &__certificatesLeft {
     left: 0;
     z-index: 2;
     width: 300px;
+    height: 370px;
+    position: relative;
   }
 
   &__certificatesCenter {
     top: 47%;
     left: 45%;
     width: 630px;
+
     -webkit-transform: translate(-50%, -50%) !important;
     -ms-transform: translate(-50%, -50%) !important;
     transform: translate(-50%, -50%) !important;
@@ -85,6 +90,7 @@
     right: 0;
     z-index: 2;
     width: 500px;
+    height: 360px;
   }
   .imageTour {
     width: 200px;
@@ -119,14 +125,17 @@
     }
     &__certificatesLeft {
       width: 200px;
+      height: 260px;
     }
     &__certificatesCenter {
       width: 350px;
+      height: 320px;
       top: 50%;
       transform: translate(-30%, -50%);
     }
     &__certificatesRight {
       width: 325px;
+      height: 270px;
     }
     .title {
       font-size: 30px;
@@ -141,16 +150,19 @@
     }
 
     &__certificatesLeft {
-      width: 160px;
+      // width: 160px;
     }
     &__certificatesCenter,
     &__certificatesRight {
-      width: 288px;
+      // width: 288px;
+    }
+    &__author {
+      width: 100%;
     }
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 500px) {
   .about {
     &__text p {
       font-size: 20px;
@@ -173,6 +185,17 @@
     &__certificatesRight {
       top: 42%;
       z-index: 3;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .about {
+    &__certificatesLeft,
+    &__certificatesCenter,
+    &__certificatesRight {
+      width: 100%;
+      height: 200px;
     }
   }
 }

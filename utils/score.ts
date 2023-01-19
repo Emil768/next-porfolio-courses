@@ -1,4 +1,4 @@
-import { QuesProps, TestProps } from "propTypes";
+import { QuesProps } from "propTypes";
 
 export const testResult = (ques: QuesProps[]) =>
   ques.reduce(

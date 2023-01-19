@@ -4,8 +4,8 @@ import useSwr from "swr";
 import { ResultList, ProgressProvider, ScoreBlock } from "components";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { TestProps, UserProps } from "propTypes";
-import { useEffect } from "react";
+import { TestProps } from "propTypes";
+
 import axios from "utils/axios";
 import useAuthStore from "store/auth";
 

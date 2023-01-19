@@ -7,6 +7,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import styles from "../styles/Programs.module.scss";
+import Head from "next/head";
 
 const Programs = () => {
   useEffect(() => {
@@ -14,6 +15,25 @@ const Programs = () => {
   }, []);
   return (
     <section className={styles.programs}>
+      <Head>
+        <title>Программа курса Extra school</title>
+        <meta
+          name="description"
+          content="Программа курса Extra school - учебная программа объяснит тебе сложное доступным языком, с образными примерами так, что ты поймешь и запомнишь"
+        />
+        <meta property="og:title" content="Программа курса Extra school" />
+        <meta
+          property="og:description"
+          content="Программа курса Extra school - учебная программа объяснит тебе сложное доступным языком, с образными примерами так, что ты поймешь и запомнишь"
+        />
+        <meta
+          property="og:image"
+          content={
+            "https://res.cloudinary.com/dl4ooiriz/image/upload/v1672837860/checklists_cover_m1f4zm.png"
+          }
+        />
+        <meta property="og:type" content="website" />
+      </Head>
       <div className={styles.programs__content}>
         <h1
           className={[styles.programs__title, styles.title].join(" ")}

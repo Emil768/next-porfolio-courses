@@ -19,12 +19,14 @@
   }
 
   &__content {
+    width: 100%;
+    height: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: flex-end;
-    align-items: flex-end;
+    -webkit-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
@@ -42,7 +44,9 @@
     position: relative;
     -webkit-box-flex: 30%;
     -ms-flex: 30% 0 0px;
-    flex: 0 0 45%;
+    flex: 1 0 45%;
+    height: 100%;
+    // align-self: center;
   }
 
   &__title {
@@ -57,7 +61,10 @@
   }
 
   &__author {
-    width: 100%;
+    // width: auto;
+    // height: auto;
+
+    object-fit: contain;
   }
 
   &__button {
@@ -83,14 +90,18 @@
     }
   }
 
+  .imageWrapper {
+    position: relative;
+    z-index: 0;
+  }
+
   .imageSamolet {
-    position: absolute;
-    width: 200px;
+    object-fit: contain; // Optional
     -webkit-transform: rotateZ(-13deg);
     -ms-transform: rotate(-13deg);
     transform: rotateZ(-13deg);
-    top: -154px;
-    left: 13px;
+
+    top: -50px !important;
   }
 
   .imageJournal {
@@ -104,10 +115,6 @@
   }
 }
 
-.imageWrapper {
-  position: relative;
-  z-index: 0;
-}
 .rotate {
   width: 100px;
   position: absolute;

@@ -4,6 +4,7 @@ import useSwr from "swr";
 import styles from "./TopResults.module.scss";
 import { ScoreProps } from "propTypes";
 import Link from "next/link";
+import Image from "next/legacy/image";
 
 export const TopResults = ({ testId }: { testId: string }) => {
   const fetcher = async () => {
@@ -15,7 +16,7 @@ export const TopResults = ({ testId }: { testId: string }) => {
 
   return (
     <div className={styles.topResults} data-testid="TopResults">
-      {data && data.length !== 0 ? (
+      {data && (
         <div className={styles.topResults__content}>
           <h3 className={styles.topResults__title}>Топ прохождений🔥</h3>
 
@@ -24,7 +25,13 @@ export const TopResults = ({ testId }: { testId: string }) => {
               <ul className={styles.topResults__list} key={item._id}>
                 <li className={styles.topResults__item}>
                   <div className={styles.topResults__user}>
-                    <img src={item.scoreBy.avatarUrl.url} alt="avatar" />
+                    <Image
+                      width={40}
+                      height={40}
+                      quality={100}
+                      src={item.scoreBy.avatarUrl.url}
+                      alt="avatar"
+                    />
                     <Link
                       className={styles.topResults__link}
                       href={`/user/${item.scoreBy._id}`}
@@ -40,7 +47,7 @@ export const TopResults = ({ testId }: { testId: string }) => {
             ))}
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

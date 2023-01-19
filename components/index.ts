@@ -26,4 +26,5 @@ export * from "./TopResults/TopResults";
 export * from "./FullTestBlock/FullTestBlock";
 export * from "./AnswerOfferInfo/AnswerOfferInfo";
 export * from "./AnswerBlockOffer/AnswerBlockOffer";
+export * from "./AboutBlock/AboutBlock";
 export * from "./Home/Home";

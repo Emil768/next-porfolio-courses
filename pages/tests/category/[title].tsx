@@ -5,29 +5,23 @@ import { Test, Categories, SortPopup, EmptyBlock } from "components";
 import { GetServerSideProps } from "next/types";
 
 import axios from "utils/axios";
-import { useRouter } from "next/router";
 import { TestProps } from "propTypes";
 import Head from "next/head";
+import { title } from "process";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
-    if (context.query.sort) {
-      const { data } = await axios.get(`/sort/${context.query.sort}`);
+    const { title } = context.params!;
+    const { data } = await axios.get<TestProps[]>(`/category/${title}`);
 
-      return {
-        props: { tests: data },
-      };
-    }
-
-    const { data } = await axios.get<TestProps[]>("/tests");
     return {
       props: { tests: data },
     };
   } catch (err) {
     return {
-      props: { tests: [] },
+      props: { tests: [], title },
     };
   }
 };

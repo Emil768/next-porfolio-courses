@@ -6,41 +6,46 @@ import Link from "next/link";
 import useAuthStore from "store/auth";
 import axios from "utils/axios";
 import { useRouter } from "next/dist/client/router";
+import Image from "next/legacy/image";
 
 export const Test = ({
-  _id,
-  title,
-  text,
-  category,
-  user,
-  likes,
-  backgroundImage,
-}: TestProps) => {
+  test,
+  setLoading,
+}: {
+  test: TestProps;
+  setLoading: () => void;
+}) => {
   const router = useRouter();
   const { data } = useAuthStore();
+
+  const { _id, title, text, category, user, likes, backgroundImage } = test;
   const checkTestId = likes.find((item) => item.likeBy._id === data?._id);
 
   const onLikeTest = async () => {
     await axios.patch<TestProps>("/like", {
       testId: _id,
     });
-    router.replace({ pathname: "/tests" }, `/tests?sort=${router.query.date}`, {
+    router.replace(router.asPath, undefined, {
       scroll: false,
     });
+    setLoading();
   };
   const onUnlikeTest = async () => {
     await axios.patch<TestProps>("/unlike", {
       testId: _id,
     });
-    router.replace({ pathname: router.asPath }, undefined, {
+    router.replace(router.asPath, undefined, {
       scroll: false,
     });
+    setLoading();
   };
 
   return (
     <div className={styles.note}>
-      <img
+      <Image
         className={styles.note__backgroundImage}
+        width={400}
+        height={200}
         src={backgroundImage.url}
         alt="preview"
       />
@@ -51,8 +56,11 @@ export const Test = ({
             <i className={styles.circle}></i> {category.label}
           </span>
           <span className={styles.author}>
-            <img
+            <Image
               src={`${user.avatarUrl.url}`}
+              width={30}
+              height={30}
+              unoptimized={true}
               alt="avatar"
               className={styles.author__avatar}
             />
@@ -74,7 +82,12 @@ export const Test = ({
               <div className={styles.note__reactionUsers}>
                 {likes.slice(-3).map((item) => (
                   <div className={styles.note__likeUser} key={item._id}>
-                    <img src={item.likeBy.avatarUrl.url} alt="avatar" />
+                    <Image
+                      layout="fill"
+                      quality={100}
+                      src={item.likeBy.avatarUrl.url}
+                      alt="avatar user"
+                    />
                   </div>
                 ))}
               </div>

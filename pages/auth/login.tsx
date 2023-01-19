@@ -7,6 +7,7 @@ import Link from "next/link";
 import styles from "styles/Login.module.scss";
 import useAuthStore from "store/auth";
 import { useEffect } from "react";
+import Head from "next/head";
 
 const Login = () => {
   const router = useRouter();
@@ -47,6 +48,17 @@ const Login = () => {
 
   return (
     <div className={styles.login}>
+      <Head>
+        <title>Авторизация - Extra school</title>
+        <meta property="og:title" content="Авторизоваться - Extra school" />
+        <meta
+          property="og:image"
+          content={
+            "https://res.cloudinary.com/dl4ooiriz/image/upload/v1672837860/checklists_cover_m1f4zm.png"
+          }
+        />
+        <meta property="og:type" content="website" />
+      </Head>
       <form action="" className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.form__content}>
           <h1 className={styles.form__title}>Авторизация</h1>

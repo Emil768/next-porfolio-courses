@@ -15,6 +15,7 @@ import {
 } from "components";
 
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
@@ -39,12 +40,30 @@ const UserInfo = ({ userInfo }: { userInfo: AllUserActionProps }) => {
   const handlerSwitchCategory = (title: string) => setCategoryType(title);
 
   return (
-    <div className={styles.user} data-testid="UserInfo">
+    <section className={styles.user} data-testid="UserInfo">
+      <Head>
+        <title>{`${user.fullName} - Extra school`}</title>
+
+        <meta property="og:title" content={`${user.fullName} - Extra school`} />
+        <meta
+          property="og:image"
+          content={
+            "https://res.cloudinary.com/dl4ooiriz/image/upload/v1672837860/checklists_cover_m1f4zm.png"
+          }
+        />
+        <meta
+          property="og:image"
+          content={
+            "https://res.cloudinary.com/dl4ooiriz/image/upload/v1672837860/checklists_cover_m1f4zm.png"
+          }
+        />
+        <meta property="og:type" content="article" />
+      </Head>
       {Object.keys(userInfo).length !== 0 ? (
         <div className={styles.user__content}>
           <div className={styles.user__avatar}>
             <div className={styles.questions__image}>
-              <img src={user.avatarUrl.url} alt="avatar" />
+              <img src={user.avatarUrl.url} alt="avatar user" />
             </div>
 
             <div className={styles.user__contact}>
@@ -140,7 +159,7 @@ const UserInfo = ({ userInfo }: { userInfo: AllUserActionProps }) => {
       ) : (
         <div>Error...</div>
       )}
-    </div>
+    </section>
   );
 };
 

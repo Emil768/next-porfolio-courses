@@ -26,9 +26,9 @@ export const Categories = () => {
 
         <li className={styles.categories__item}>
           <Link
-            href={"/category/tests"}
+            href={"/tests/category/tests"}
             className={
-              router.asPath === "/category/tests"
+              router.asPath === "/tests/category/tests"
                 ? [styles.categories__link, styles.categories__linkActive].join(
                     " "
                   )
@@ -40,9 +40,9 @@ export const Categories = () => {
         </li>
         <li className={styles.categories__item}>
           <Link
-            href={"/category/offers"}
+            href={"/tests/category/offers"}
             className={
-              router.asPath === "/category/offers"
+              router.asPath === "/tests/category/offers"
                 ? [styles.categories__link, styles.categories__linkActive].join(
                     " "
                   )

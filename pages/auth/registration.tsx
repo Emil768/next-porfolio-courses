@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import useAuthStore from "store/auth";
 import { useEffect } from "react";
+import Head from "next/head";
 
 const Registration = () => {
   const router = useRouter();
@@ -66,7 +67,6 @@ const Registration = () => {
         router.push("/");
       }
     } catch (err) {
-      console.log(err);
       window.alert("Не удалось зарегистрироваться");
     }
   };
@@ -79,6 +79,17 @@ const Registration = () => {
 
   return (
     <div className={styles.registration} data-testid="Login">
+      <Head>
+        <title>Регистрация - Extra school</title>
+        <meta property="og:title" content="Регистрация - Extra school" />
+        <meta
+          property="og:image"
+          content={
+            "https://res.cloudinary.com/dl4ooiriz/image/upload/v1672837860/checklists_cover_m1f4zm.png"
+          }
+        />
+        <meta property="og:type" content="website" />
+      </Head>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.form__content}>
           <h2 className={styles.form__title}>Регистрация</h2>

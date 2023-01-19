@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { PopupItems, TestProps, UserProps } from "propTypes";
+import { PopupItems, UserProps } from "propTypes";
 import { Popup } from "components";
 
 import { ArrowIcon } from "public/icons";
 
 import styles from "./UserPanel.module.scss";
 import useAuthStore from "store/auth";
+import Image from "next/legacy/image";
 
 export const UserPanel = ({ _id, avatarUrl }: UserProps) => {
   const [userState, setUserState] = useState(false);
@@ -33,7 +34,14 @@ export const UserPanel = ({ _id, avatarUrl }: UserProps) => {
   return (
     <div className={styles.user__panel} data-testid="UserPanel">
       <div className={styles.author} onClick={() => setUserState(!userState)}>
-        <img src={avatarUrl.url} alt="" className={styles.author__avatar} />
+        <Image
+          width={45}
+          height={45}
+          unoptimized={true}
+          src={avatarUrl.url}
+          alt=""
+          className={styles.author__avatar}
+        />
         <ArrowIcon className={styles.user__panelArrow} />
       </div>
       <Popup active={userState} items={userSettings} />

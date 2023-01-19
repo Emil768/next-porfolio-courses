@@ -29,9 +29,6 @@ export type QuizStateProps = {
   showScore: boolean;
   status: "loading" | "loaded" | "error";
   fetchTest: (data: TestProps) => void;
-  fetchAddComment: (comment: CommentPropsCreate) => void;
-  fetchUpdateComment: (comment: CommentPropsEdit) => void;
-  fetchRemoveComment: (comment: CommentPropsRemove) => void;
   setAnswerQuestion: (answer: AnswerStateProps) => void;
   onGetCurrentAnswer: (answer: AnswerStateProps) => void;
   setShowScore: () => void;

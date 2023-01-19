@@ -1,15 +1,12 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import httpProxyMiddleware from "next-http-proxy-middleware";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-// For preventing header corruption, specifically Content-Length header
-export const config = {
-  api: {
-    bodyParser: false,
-  },
+type Data = {
+  name: string;
 };
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-  httpProxyMiddleware(req, res, {
-    target: "http://localhost:3001/uploads",
-  });
-};
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
+  res.status(200).json({ name: "John Doe" });
+}

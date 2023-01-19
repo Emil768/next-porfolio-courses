@@ -7,6 +7,7 @@ import { useRouter } from "next/dist/client/router";
 import axios from "utils/axios";
 import useAuthStore from "store/auth";
 import useTestStore from "store/test";
+import Head from "next/head";
 
 const AddTest = () => {
   const router = useRouter();
@@ -50,58 +51,75 @@ const AddTest = () => {
   }, []);
 
   return (
-    <form className={styles.addNote} onSubmit={onSubmit}>
-      <div className={styles.addNote__content}>
-        <div className={styles.addNote__top}>
-          <ul className={styles.addNote__list}>
-            <li
-              className={
-                isToggleNav
-                  ? [styles.addNote__item, styles.addNote__itemActive].join(" ")
-                  : styles.addNote__item
-              }
-              onClick={() => setIsToggleNav(true)}
-            >
-              Основное
-            </li>
-            <li
-              className={
-                isToggleNav
-                  ? styles.addNote__item
-                  : [styles.addNote__item, styles.addNote__itemActive].join(" ")
-              }
-              onClick={() => setIsToggleNav(false)}
-            >
-              Вопросы
-            </li>
-          </ul>
-        </div>
+    <>
+      <Head>
+        <title>Добавить тест - Extra school</title>
+        <meta property="og:title" content="Добавить тест - Extra school" />
+        <meta
+          property="og:image"
+          content={
+            "https://res.cloudinary.com/dl4ooiriz/image/upload/v1672837860/checklists_cover_m1f4zm.png"
+          }
+        />
+        <meta property="og:type" content="website" />
+      </Head>
+      <form className={styles.addNote} onSubmit={onSubmit}>
+        <div className={styles.addNote__content}>
+          <div className={styles.addNote__top}>
+            <ul className={styles.addNote__list}>
+              <li
+                className={
+                  isToggleNav
+                    ? [styles.addNote__item, styles.addNote__itemActive].join(
+                        " "
+                      )
+                    : styles.addNote__item
+                }
+                onClick={() => setIsToggleNav(true)}
+              >
+                Основное
+              </li>
+              <li
+                className={
+                  isToggleNav
+                    ? styles.addNote__item
+                    : [styles.addNote__item, styles.addNote__itemActive].join(
+                        " "
+                      )
+                }
+                onClick={() => setIsToggleNav(false)}
+              >
+                Вопросы
+              </li>
+            </ul>
+          </div>
 
-        {isToggleNav ? <AddTestMain /> : <AddTestQuestion />}
+          {isToggleNav ? <AddTestMain /> : <AddTestQuestion />}
 
-        <div className={styles.addNote__buttons}>
-          <button className={styles.addNote__confirm} type="submit">
-            Опубликовать
-          </button>
-          {!isToggleNav ? (
+          <div className={styles.addNote__buttons}>
+            <button className={styles.addNote__confirm} type="submit">
+              Опубликовать
+            </button>
+            {!isToggleNav ? (
+              <button
+                type="button"
+                className={styles.addNote__confirm}
+                onClick={handlerAddQuestion}
+              >
+                Добавить вопрос
+              </button>
+            ) : null}
             <button
               type="button"
-              className={styles.addNote__confirm}
-              onClick={handlerAddQuestion}
+              className={styles.addNote__cancel}
+              onClick={handlerCancelQuestion}
             >
-              Добавить вопрос
+              Отмена
             </button>
-          ) : null}
-          <button
-            type="button"
-            className={styles.addNote__cancel}
-            onClick={handlerCancelQuestion}
-          >
-            Отмена
-          </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 };
 

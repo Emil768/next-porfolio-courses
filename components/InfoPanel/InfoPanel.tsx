@@ -3,6 +3,7 @@ import styles from "./InfoPanel.module.scss";
 import { options } from "data";
 import { TestProps } from "propTypes";
 import Link from "next/link";
+import Image from "next/legacy/image";
 
 export const InfoPanel = ({
   createdAt,
@@ -35,9 +36,12 @@ export const InfoPanel = ({
       {new Date(createdAt).toLocaleDateString("ru-RU", options)}
     </span>
     <Link href={`/user/${user._id}`} className={styles.author}>
-      <img
+      <Image
         src={`${user.avatarUrl.url}`}
-        alt=""
+        width={30}
+        height={30}
+        unoptimized={true}
+        alt="avatar user"
         className={styles.author__avatar}
       />
       <span className={styles.author__name}>{user.fullName}</span>

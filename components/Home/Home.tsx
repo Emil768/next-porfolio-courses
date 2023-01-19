@@ -1,7 +1,8 @@
 import styles from "./Home.module.scss";
 
-import { SamoletIcon, MapIcon_1 } from "public/gallery";
+import { SamoletIcon, MapIcon } from "public/gallery";
 import Link from "next/link";
+import Image from "next/legacy/image";
 
 export const Home = () => {
   return (
@@ -9,9 +10,12 @@ export const Home = () => {
       <div className={styles.home__content}>
         <div className={styles.home__contentText} data-aos="zoom-in-right">
           <div data-aos="fade-right" className={styles.imageWrapper}>
-            <img
+            <Image
               src={SamoletIcon.src}
               className={[styles.imageSamolet, styles.rotate].join(" ")}
+              width={150}
+              height={150}
+              priority={true}
               alt="samolet"
             />
           </div>
@@ -28,9 +32,14 @@ export const Home = () => {
           </Link>
         </div>
         <div className={styles.home__contentImage}>
-          <img
-            src={MapIcon_1.src}
+          <Image
+            src={MapIcon.src}
             className={styles.home__author}
+            width={600}
+            height={500}
+            layout="responsive"
+            quality={100}
+            priority={true}
             alt="world"
           />
         </div>
