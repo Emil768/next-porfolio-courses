@@ -10,6 +10,8 @@ import axios from "axios";
 import ReactSwitch from "react-switch";
 import useTestStore from "store/test";
 
+import Image from "next/legacy/image";
+
 interface QuestionBlockProps extends QuesLessProps {
   id: number;
 }
@@ -178,11 +180,13 @@ export const QuestionBlock = ({ id, answers }: QuestionBlockProps) => {
         />
 
         {currentQuestion.imageURL?.url && (
-          <img
-            className={styles.addNote__image}
-            src={`${currentQuestion.imageURL?.url}`}
-            alt="preview"
-          />
+          <div className={styles.addNote__image}>
+            <Image
+              layout="fill"
+              src={`${currentQuestion.imageURL?.url}`}
+              alt="preview"
+            />
+          </div>
         )}
       </div>
 

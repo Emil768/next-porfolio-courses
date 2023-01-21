@@ -1,13 +1,9 @@
 import { options } from "data";
 import Link from "next/link";
-import { TestProps, UserProps } from "propTypes";
+import { TestSwitchProps } from "propTypes";
 
 import styles from "./TestSwitch.module.scss";
-
-interface TestSwitchProps {
-  user: UserProps;
-  data: TestProps[];
-}
+import Image from "next/legacy/image";
 
 export const TestSwitch = ({ user, data }: TestSwitchProps) => (
   <>
@@ -15,7 +11,10 @@ export const TestSwitch = ({ user, data }: TestSwitchProps) => (
       data.map((item) => {
         return (
           <div className={styles.user__infoBlock} key={item._id}>
-            <img
+            <Image
+              width={48}
+              height={48}
+              unoptimized={true}
               className={styles.user__infoImage}
               src={user.avatarUrl.url}
               alt="avatar"

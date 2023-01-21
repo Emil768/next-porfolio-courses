@@ -1,4 +1,3 @@
-// import { useAppSelector } from "redux/hooks";
 import { QuesProps } from "propTypes";
 import { testResult } from "utils";
 import styles from "./ResultList.module.scss";

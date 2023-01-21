@@ -1,14 +1,5 @@
 .home {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 85vh;
+  height: 100vh;
 
   &__quote {
     display: block;
@@ -20,16 +11,16 @@
 
   &__content {
     width: 100%;
-    height: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: flex-start;
-    -ms-flex-align: flex-start;
-    align-items: flex-start;
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    padding-top: 30px;
   }
 
   &__contentText {
@@ -38,15 +29,6 @@
     -webkit-box-flex: 55%;
     -ms-flex: 55% 0 0px;
     flex: 0 0 50%;
-  }
-
-  &__contentImage {
-    position: relative;
-    -webkit-box-flex: 30%;
-    -ms-flex: 30% 0 0px;
-    flex: 1 0 45%;
-    height: 100%;
-    // align-self: center;
   }
 
   &__title {
@@ -60,10 +42,20 @@
     margin-bottom: 40px;
   }
 
-  &__author {
-    // width: auto;
-    // height: auto;
+  &__contentImage {
+    position: relative;
+    -webkit-box-flex: 30%;
+    -ms-flex: 30% 0 0px;
+    flex: 1 0 45%;
+    height: 370px;
+    width: 100%;
 
+    // align-self: center;
+  }
+
+  &__author {
+    max-width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 
@@ -93,6 +85,8 @@
   .imageWrapper {
     position: relative;
     z-index: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .imageSamolet {
@@ -100,7 +94,6 @@
     -webkit-transform: rotateZ(-13deg);
     -ms-transform: rotate(-13deg);
     transform: rotateZ(-13deg);
-
     top: -50px !important;
   }
 
@@ -123,9 +116,9 @@
 @media (max-width: 990px) {
   .home {
     height: 100vh;
-    &__author {
-      max-width: 100%;
-    }
+    // &__author {
+    //   max-width: 100%;
+    // }
     &__content {
       justify-content: center;
       align-items: center;
@@ -136,10 +129,11 @@
     }
     &__contentImage {
       flex: none;
-    }
-    &__author {
       display: none;
     }
+    // &__author {
+    //   display: none;
+    // }
     .imageJournal {
       top: 170px;
       right: 335px;

@@ -109,3 +109,25 @@ export type AddTestContextType = {
   }: MainAddTestProps) => void;
   currentQuestionIndex: number;
 };
+
+//switch cases
+
+export interface TestSwitchProps {
+  user: UserProps;
+  data: TestProps[];
+}
+
+export interface PublishSwitchProps {
+  user: UserProps;
+  data: TestProps[];
+}
+
+export interface LikesSwitchProps {
+  user: UserProps;
+  data: TestProps[];
+}
+
+export interface CommentSwitchProps {
+  user: UserProps;
+  data: TestProps[];
+}

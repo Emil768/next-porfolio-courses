@@ -1,4 +1,5 @@
 .about {
+  position: relative;
   &__content {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -11,24 +12,25 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-bottom: 40px;
-    position: relative;
+
     z-index: 3;
   }
 
   &__top {
-    position: relative;
     margin-bottom: 50px;
   }
 
-  &__title {
+  &__contentText {
     position: relative;
-  }
-
-  &__text {
     -webkit-box-flex: 59%;
     -ms-flex: 59% 0 0px;
     flex: 59% 0 0;
-    z-index: 1;
+    z-index: 2;
+  }
+
+  &__text {
+    position: relative;
+    z-index: 3;
     p {
       margin-bottom: 20px;
       font-size: 20px;
@@ -41,6 +43,7 @@
     -ms-flex: 30% 0 0px;
     flex: 0 0 30%;
     position: relative;
+    z-index: 4;
   }
 
   &__authorImage {
@@ -59,19 +62,18 @@
   &__certificatesCenter,
   &__certificatesRight {
     position: absolute;
-    height: 475px;
+    height: 100%;
   }
 
   &__certificates img {
     max-width: 100%;
-    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   &__certificatesLeft {
     left: 0;
-    z-index: 2;
     width: 300px;
-    height: 370px;
     position: relative;
   }
 
@@ -88,18 +90,29 @@
 
   &__certificatesRight {
     right: 0;
-    z-index: 2;
     width: 500px;
+  }
+
+  &__certificatesLeft,
+  &__certificatesRight {
+    z-index: 2;
     height: 360px;
   }
+
   .imageTour {
     width: 200px;
+    height: 100px;
     position: absolute;
+    right: 0;
+    bottom: 200px;
+    z-index: 2;
     -webkit-transform: rotateZ(-14deg);
     -ms-transform: rotate(-14deg);
     transform: rotateZ(-14deg);
-    left: -212px;
-    bottom: 85px;
+    img {
+      max-width: 100%;
+      height: 100%;
+    }
   }
   .title {
     font-size: 55px;
@@ -107,11 +120,18 @@
     z-index: 3;
   }
   .slice {
-    z-index: 2;
-    width: 100%;
     position: absolute;
-    top: -50px;
-    left: -100px;
+    z-index: 1;
+    width: 100%;
+    height: 800px;
+    top: 0;
+    left: -200px;
+
+    img {
+      max-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 }
 
@@ -125,7 +145,6 @@
     }
     &__certificatesLeft {
       width: 200px;
-      height: 260px;
     }
     &__certificatesCenter {
       width: 350px;
@@ -135,6 +154,9 @@
     }
     &__certificatesRight {
       width: 325px;
+    }
+    &__certificatesLeft,
+    &__certificatesRight {
       height: 270px;
     }
     .title {
@@ -149,15 +171,11 @@
       flex-direction: column;
     }
 
-    &__certificatesLeft {
-      // width: 160px;
-    }
-    &__certificatesCenter,
-    &__certificatesRight {
-      // width: 288px;
-    }
     &__author {
       width: 100%;
+    }
+    .slice {
+      left: 0;
     }
   }
 }
@@ -195,7 +213,6 @@
     &__certificatesCenter,
     &__certificatesRight {
       width: 100%;
-      height: 200px;
     }
   }
 }

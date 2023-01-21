@@ -17,6 +17,8 @@ import {
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 
+import Image from "next/legacy/image";
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const { id } = context.params!;
@@ -62,8 +64,15 @@ const UserInfo = ({ userInfo }: { userInfo: AllUserActionProps }) => {
       {Object.keys(userInfo).length !== 0 ? (
         <div className={styles.user__content}>
           <div className={styles.user__avatar}>
-            <div className={styles.questions__image}>
-              <img src={user.avatarUrl.url} alt="avatar user" />
+            <div className={styles.user__avatarImage}>
+              <Image
+                width={150}
+                height={150}
+                quality={100}
+                priority={true}
+                src={user.avatarUrl.url}
+                alt="avatar user"
+              />
             </div>
 
             <div className={styles.user__contact}>

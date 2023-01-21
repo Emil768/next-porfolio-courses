@@ -9,27 +9,20 @@ import {
 import Image from "next/legacy/image";
 import styles from "./About.module.scss";
 
-import { useEffect } from "react";
-
-import AOS from "aos";
 import "aos/dist/aos.css";
 
-export const AboutBlock = () => {
-  useEffect(() => {
-    AOS.init({ disable: "phone" });
-  }, []);
-  return (
-    <div className={styles.about}>
-      <div className={styles.about__top}>
-        <h2
-          className={[styles.about__title, styles.title].join(" ")}
-          data-aos="fade-right"
-        >
-          ОБО МНЕ
-        </h2>
-        <img src={SliceIcon_1.src} className={styles.slice} alt="slice" />
-      </div>
-      <div className={styles.about__content}>
+export const AboutBlock = () => (
+  <div className={styles.about}>
+    <div className={styles.about__top}>
+      <h2
+        className={[styles.about__title, styles.title].join(" ")}
+        data-aos="fade-right"
+      >
+        ОБО МНЕ
+      </h2>
+    </div>
+    <div className={styles.about__content}>
+      <div className={styles.about__contentText}>
         <div className={styles.about__text} data-aos="zoom-in">
           <p>Меня зовут Эльнара!</p>
           <p>
@@ -61,33 +54,40 @@ export const AboutBlock = () => {
           </p>
           <p>Ты с нами? Да? – Тогда WELCOME!</p>
         </div>
-        <div className={styles.about__author} data-aos="zoom-in">
-          <Image
-            className={styles.about__authorImage}
-            width={400}
-            height={450}
-            layout="responsive"
-            src={AuthorIcon.src}
-            alt="author"
-          />
-          <img className={styles.imageTour} src={TourIcon.src} alt="tour" />
+        <div className={styles.imageTour}>
+          <Image layout="fill" src={TourIcon.src} alt="tour" />
         </div>
       </div>
-      <div className={styles.about__certificates}>
-        <div className={styles.about__certificatesLeft} data-aos="zoom-in">
-          <Image src={CertificateIcon_3.src} layout="fill" alt="certificate" />
-        </div>
-        <div
-          className={styles.about__certificatesCenter}
-          data-aos="fade-down"
-          data-aos-anchor=".about__certificates-left"
-        >
-          <Image src={CertificateIcon_1.src} layout="fill" alt="certificate" />
-        </div>
-        <div className={styles.about__certificatesRight} data-aos="zoom-in">
-          <Image src={CertificateIcon_2.src} layout="fill" alt="certificate" />
-        </div>
+
+      <div className={styles.about__author} data-aos="zoom-in">
+        <Image
+          className={styles.about__authorImage}
+          width={400}
+          height={450}
+          layout="responsive"
+          src={AuthorIcon.src}
+          alt="author"
+        />
+      </div>
+
+      <div className={styles.slice}>
+        <Image layout="fill" src={SliceIcon_1.src} alt="slice" />
       </div>
     </div>
-  );
-};
+    <div className={styles.about__certificates}>
+      <div className={styles.about__certificatesLeft} data-aos="zoom-in">
+        <Image src={CertificateIcon_3.src} layout="fill" alt="certificate" />
+      </div>
+      <div
+        className={styles.about__certificatesCenter}
+        data-aos="fade-down"
+        data-aos-anchor=".about__certificates-left"
+      >
+        <Image src={CertificateIcon_1.src} layout="fill" alt="certificate" />
+      </div>
+      <div className={styles.about__certificatesRight} data-aos="zoom-in">
+        <Image src={CertificateIcon_2.src} layout="fill" alt="certificate" />
+      </div>
+    </div>
+  </div>
+);

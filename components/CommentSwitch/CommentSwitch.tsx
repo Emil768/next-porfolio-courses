@@ -1,19 +1,19 @@
 import { options } from "data";
 import Link from "next/link";
-import { TestProps, UserProps } from "propTypes";
+import { CommentSwitchProps } from "propTypes";
 import styles from "./CommentSwitch.module.scss";
 
-interface CommentSwitchProps {
-  user: UserProps;
-  data: TestProps[];
-}
+import Image from "next/legacy/image";
 
 export const CommentSwitch = ({ user, data }: CommentSwitchProps) => (
   <>
     {data.length ? (
       data.map((item) => (
         <div className={styles.user__infoBlock} key={item._id}>
-          <img
+          <Image
+            width={48}
+            height={48}
+            unoptimized={true}
             className={styles.user__infoImage}
             src={user.avatarUrl.url}
             alt="avatar"

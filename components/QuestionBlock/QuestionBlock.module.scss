@@ -57,9 +57,15 @@
     margin-bottom: 40px;
   }
   &__image {
-    height: 250px;
+    position: relative;
+    height: 200px;
     width: 100%;
-    object-fit: cover;
+
+    img {
+      height: 100%;
+      max-width: 100%;
+      object-fit: cover;
+    }
   }
   &__answersAdd {
     font-size: 14px;

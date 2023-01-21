@@ -1,21 +1,21 @@
 import styles from "./LikesSwitch.module.scss";
 
-import { TestProps, UserProps } from "propTypes";
+import { LikesSwitchProps } from "propTypes";
 
 import { options } from "data";
 import Link from "next/link";
 
-interface LikesSwitchProps {
-  user: UserProps;
-  data: TestProps[];
-}
+import Image from "next/legacy/image";
 
 export const LikesSwitch = ({ user, data }: LikesSwitchProps) => (
   <div className={styles.user__likes} data-testid="LikesSwitch">
     {data.length ? (
       data.map((item) => (
         <div className={styles.user__infoBlock} key={item._id}>
-          <img
+          <Image
+            width={48}
+            height={48}
+            unoptimized={true}
             className={styles.user__infoImage}
             src={user.avatarUrl.url}
             alt="avatar"

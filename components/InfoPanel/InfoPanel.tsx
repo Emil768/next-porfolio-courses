@@ -15,7 +15,7 @@ export const InfoPanel = ({
     <span>
       <i className={styles.circle}></i>{" "}
       <Link
-        href={`/category/${category.value}`}
+        href={`/tests/category/${category.value}`}
         className={styles.fullTest__category}
       >
         {category.label}

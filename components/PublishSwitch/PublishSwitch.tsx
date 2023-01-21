@@ -1,20 +1,20 @@
 import { options } from "data";
 import Link from "next/link";
-import { TestProps, UserProps } from "propTypes";
+import { PublishSwitchProps } from "propTypes";
 
 import styles from "./PublishSwitch.module.scss";
 
-interface PublishSwitchProps {
-  user: UserProps;
-  data: TestProps[];
-}
+import Image from "next/legacy/image";
 
 export const PublishSwitch = ({ user, data }: PublishSwitchProps) => (
   <>
     {data.length ? (
       data.map((item) => (
         <div className={styles.user__infoBlock} key={item._id}>
-          <img
+          <Image
+            width={48}
+            height={48}
+            unoptimized={true}
             className={styles.user__infoImage}
             src={user.avatarUrl.url}
             alt="avatar"

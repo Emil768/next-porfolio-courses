@@ -5,7 +5,7 @@ import { Test, Categories, SortPopup, EmptyBlock } from "components";
 import { GetServerSideProps } from "next/types";
 
 import axios from "utils/axios";
-import { useRouter } from "next/router";
+
 import { TestProps } from "propTypes";
 import Head from "next/head";
 import { useEffect, useState } from "react";

@@ -2,7 +2,12 @@ import Link from "next/link";
 import { PopupProps } from "propTypes";
 import styles from "./Popup.module.scss";
 
-export const Popup = ({ active, items, activeLabel }: PopupProps) => {
+export const Popup = ({
+  active,
+  items,
+  activeLabel,
+  setStatePopup,
+}: PopupProps) => {
   return (
     <div
       className={
@@ -14,7 +19,11 @@ export const Popup = ({ active, items, activeLabel }: PopupProps) => {
         {items.map((item, index) =>
           item.link ? (
             <li key={index}>
-              <Link className={styles.popup__item} href={`${item.link}`}>
+              <Link
+                className={styles.popup__item}
+                href={`${item.link}`}
+                onClick={setStatePopup}
+              >
                 {item.name}
               </Link>
             </li>
@@ -26,14 +35,15 @@ export const Popup = ({ active, items, activeLabel }: PopupProps) => {
                   : styles.popup__item
               }
               key={index}
-              onClick={() =>
+              onClick={() => {
                 item.onClickPopup &&
-                item.onClickPopup({
-                  name: item.name,
-                  type: item.type!,
-                  order: item.order!,
-                })
-              }
+                  item.onClickPopup({
+                    name: item.name,
+                    type: item.type!,
+                    order: item.order!,
+                  }),
+                  setStatePopup;
+              }}
             >
               {item.name}
             </li>

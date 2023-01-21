@@ -22,7 +22,7 @@ export const Home = () => {
           <h1 className={styles.home__title}>Английский для начинающих</h1>
           <p className={styles.home__subtitle}>
             Сделай первый шаг навстречу английскому без ошибок с
-            учителем-билингвой
+            учителем-билингвой!
           </p>
           <q className={styles.home__quote}>
             Enjoy English u know, discover English u don&apos;t.
@@ -31,13 +31,11 @@ export const Home = () => {
             Записаться
           </Link>
         </div>
-        <div className={styles.home__contentImage}>
+        <div className={styles.home__contentImage} data-aos="zoom-in">
           <Image
             src={MapIcon.src}
             className={styles.home__author}
-            width={600}
-            height={500}
-            layout="responsive"
+            layout="fill"
             quality={100}
             priority={true}
             alt="world"

@@ -31,6 +31,8 @@ export const UserPanel = ({ _id, avatarUrl }: UserProps) => {
     },
   ];
 
+  const onToggleState = () => setUserState(false);
+
   return (
     <div className={styles.user__panel} data-testid="UserPanel">
       <div className={styles.author} onClick={() => setUserState(!userState)}>
@@ -39,12 +41,16 @@ export const UserPanel = ({ _id, avatarUrl }: UserProps) => {
           height={45}
           unoptimized={true}
           src={avatarUrl.url}
-          alt=""
+          alt="avatar user"
           className={styles.author__avatar}
         />
         <ArrowIcon className={styles.user__panelArrow} />
       </div>
-      <Popup active={userState} items={userSettings} />
+      <Popup
+        active={userState}
+        items={userSettings}
+        setStatePopup={onToggleState}
+      />
     </div>
   );
 };

@@ -88,6 +88,7 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
                 height={300}
                 layout="responsive"
                 src={currentQues.imageURL?.url}
+                priority={true}
                 alt="question background"
               />
             </div>

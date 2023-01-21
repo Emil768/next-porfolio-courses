@@ -3,7 +3,7 @@ import { Popup } from "components";
 import { useState } from "react";
 import styles from "./SortPopup.module.scss";
 import { useRouter } from "next/dist/client/router";
-import axios from "axios";
+
 export const SortPopup = () => {
   const router = useRouter();
 

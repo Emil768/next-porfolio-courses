@@ -8,6 +8,7 @@ import "aos/dist/aos.css";
 
 import styles from "../styles/Programs.module.scss";
 import Head from "next/head";
+import Image from "next/legacy/image";
 
 const Programs = () => {
   useEffect(() => {
@@ -43,8 +44,9 @@ const Programs = () => {
         </h1>
         <div className={styles.programs__contentInfo}>
           <div className={styles.imageWrapper} data-aos="fade-down-right">
-            <img
-              className={[styles.imagePlayer, styles.rotate].join(" ")}
+            <Image
+              priority={true}
+              layout="fill"
               src={MusicIcon.src}
               alt="music"
             />
@@ -55,11 +57,9 @@ const Programs = () => {
               data-aos="zoom-in"
               key={index}
             >
-              <img
-                className={styles.programs__blockSlice}
-                src={item.slice.src}
-                alt="slice"
-              />
+              <div className={styles.programs__blockSlice}>
+                <Image layout="fill" src={item.slice.src} alt="slice" />
+              </div>
               <span className={styles.programs__blockNumber}>{item.id}</span>
               <div className={styles.programs__blockInfo}>
                 <h1 className={styles.programs__blockTitle}>{item.title}</h1>
@@ -68,9 +68,14 @@ const Programs = () => {
             </div>
           ))}
         </div>
-        <div data-aos="zoom-in" data-aos-anchor=".programs__block">
-          <img
-            className={[styles.imagePhone, styles.rotate].join(" ")}
+        <div
+          data-aos="zoom-in"
+          data-aos-anchor=".programs__block"
+          className={styles.imageWrapper}
+        >
+          <Image
+            className={styles.imagePhone}
+            layout="fill"
             src={HeadphonesIcon.src}
             alt="headphones"
           />

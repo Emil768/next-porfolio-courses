@@ -8,6 +8,8 @@ import { categoryOptions } from "data";
 import axios from "axios";
 import useTestStore from "store/test";
 
+import Image from "next/legacy/image";
+
 export const AddTestMain = () => {
   const { data, onGetProps } = useTestStore();
 
@@ -66,11 +68,9 @@ export const AddTestMain = () => {
         />
 
         {data.bgImage.url && (
-          <img
-            className={styles.inputField__image}
-            src={`${data.bgImage.url}`}
-            alt="preview"
-          />
+          <div className={styles.inputField__image}>
+            <Image layout="fill" src={`${data.bgImage.url}`} alt="preview" />
+          </div>
         )}
       </div>
       <div className={styles.inputField}>
