@@ -47,6 +47,7 @@ export const Home = () => {
             <a
               href={"https://t.me/elnaramurat"}
               target="_blank"
+              rel="noreferrer"
               className={styles.home__link}
             >
               <TelegramIcon className={styles.home__linkTelegram} />
@@ -54,6 +55,7 @@ export const Home = () => {
             <a
               href="https://api.whatsapp.com/send?phone=79787523348"
               target="_blank"
+              rel="noreferrer"
               className={[styles.home__link, styles.home__linkWhatsapp].join(
                 " "
               )}
