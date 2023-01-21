@@ -88,6 +88,11 @@
     position: absolute;
     top: 38px;
     right: -35px;
+    img {
+      max-width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
   &__links {
     color: #737373;

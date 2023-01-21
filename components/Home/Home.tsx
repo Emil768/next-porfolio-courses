@@ -32,7 +32,13 @@ export const Home = () => {
           <Link className={styles.home__button} href={"/tariffs"}>
             Записаться
             <div className={styles.home__arrow}>
-              <img src={ArrowIcon.src} alt="arrow" />
+              <Image
+                width={40}
+                height={50}
+                src={ArrowIcon.src}
+                alt="arrow"
+                priority={true}
+              />
             </div>
           </Link>
 
