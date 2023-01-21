@@ -17,3 +17,5 @@ export { default as ReplyIcon } from "./reply.svg";
 export { default as SuccessIcon } from "./success.svg";
 export { default as EmptyIcon } from "./empty-pic.svg";
 export { default as SquareIcon } from "./square.svg";
+export { default as TelegramIcon } from "./telegram.svg";
+export { default as WhatsappIcon } from "./whatsapp.svg";

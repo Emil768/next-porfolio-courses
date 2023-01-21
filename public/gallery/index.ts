@@ -14,3 +14,4 @@ export { default as SliceIcon_4 } from "./slice_4.webp";
 
 export { default as LogoIcon } from "./logo.png";
 export { default as MapIcon } from "./map.png";
+export { default as ArrowIcon } from "./arrow.png";

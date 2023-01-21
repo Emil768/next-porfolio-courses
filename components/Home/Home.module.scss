@@ -26,6 +26,7 @@
   &__contentText {
     position: relative;
     z-index: 1;
+
     -webkit-box-flex: 55%;
     -ms-flex: 55% 0 0px;
     flex: 0 0 50%;
@@ -47,7 +48,7 @@
     -webkit-box-flex: 30%;
     -ms-flex: 30% 0 0px;
     flex: 1 0 45%;
-    height: 370px;
+    height: 450px;
     width: 100%;
 
     // align-self: center;
@@ -60,8 +61,10 @@
   }
 
   &__button {
+    position: relative;
     background-color: #fff;
-    padding: 15px 30px;
+    padding: 18px 60px;
+    margin-bottom: 30px;
     border: 1px solid transparent;
     border-radius: 30px;
     display: inline-block;
@@ -79,6 +82,40 @@
       transform: translateY(-5px);
       -webkit-box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.15);
       box-shadow: 0 4px 17px 0px rgb(0, 0, 0, 0.15);
+    }
+  }
+  &__arrow {
+    position: absolute;
+    top: 38px;
+    right: -35px;
+  }
+  &__links {
+    color: #737373;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+  }
+  &__link {
+    margin-left: 10px;
+  }
+  &__linkTelegram {
+    fill: #fff;
+    transition: all 0.2s ease;
+    -webkit-filter: drop-shadow(0 0 1px rgba(47, 137, 206, 1));
+    filter: drop-shadow(0 0 1px rgba(47, 137, 206, 1));
+    &:hover {
+      -webkit-filter: drop-shadow(0 0 10px rgba(47, 137, 206, 1));
+      filter: drop-shadow(0 0 10px rgba(47, 137, 206, 1));
+    }
+  }
+  &__linkWhatsapp {
+    fill: #fff;
+    transition: all 0.2s ease;
+    -webkit-filter: drop-shadow(0 0 1px rgba(77, 194, 71, 1));
+    filter: drop-shadow(0 0 1px rgba(77, 194, 71, 1));
+    &:hover {
+      -webkit-filter: drop-shadow(0 0 10px rgba(77, 194, 71, 1));
+      filter: drop-shadow(0 0 10px rgba(77, 194, 71, 1));
     }
   }
 
@@ -116,24 +153,21 @@
 @media (max-width: 990px) {
   .home {
     height: 100vh;
-    // &__author {
-    //   max-width: 100%;
-    // }
-    &__content {
+
+    &__contentText {
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-    }
-    &__contentText {
       flex: 0 0 100%;
     }
+
     &__contentImage {
       flex: none;
       display: none;
     }
-    // &__author {
-    //   display: none;
-    // }
+
     .imageJournal {
       top: 170px;
       right: 335px;
