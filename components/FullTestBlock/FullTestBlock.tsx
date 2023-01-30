@@ -38,8 +38,6 @@ export const FullTestBlock = ({ test }: { test: TestProps }) => {
   const isEditable = data?._id === test.user?._id;
   const currentQues = test && test.ques[currentQuesIndex];
 
-  // console.log(currentQues, currentQuesIndex);
-
   const isCurrentAnswer =
     currentAnswer.index !== null && currentAnswer.answer !== "";
 

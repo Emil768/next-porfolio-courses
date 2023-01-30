@@ -6,6 +6,7 @@ export type AvatarProps = {
 export interface UserProps {
   _id?: string;
   fullName: string;
+  role: string;
   email?: string;
   token?: string;
   password?: string;

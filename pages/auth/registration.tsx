@@ -27,9 +27,9 @@ const Registration = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: "test@massl.ru",
-      password: "123123",
-      fullName: "EmilkaAdminka",
+      email: "",
+      password: "",
+      fullName: "",
       avatarUrl: "",
     },
     mode: "onChange",
@@ -51,6 +51,7 @@ const Registration = () => {
         fullName,
         email,
         password,
+        role: "user",
         avatarUrl: {
           public_id: public_id,
           url: secure_url,

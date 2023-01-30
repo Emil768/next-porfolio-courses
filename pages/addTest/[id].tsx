@@ -34,12 +34,12 @@ const ChangeTest = () => {
       });
     };
 
-    if (id && user) {
+    if (id && user?.role === "admin") {
       fetchData();
     } else {
       router.push("/");
     }
-  }, [id]);
+  }, [id, user]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

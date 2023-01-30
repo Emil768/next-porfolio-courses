@@ -8,28 +8,47 @@ import styles from "./UserPanel.module.scss";
 import useAuthStore from "store/auth";
 import Image from "next/legacy/image";
 
-export const UserPanel = ({ _id, avatarUrl }: UserProps) => {
+export const UserPanel = ({ _id, avatarUrl, role }: UserProps) => {
   const [userState, setUserState] = useState(false);
   const { logout } = useAuthStore();
-  const userSettings: PopupItems[] = [
-    {
-      name: "Профиль",
-      link: `/user/${_id}`,
-    },
-    {
-      name: "Добавить тест",
-      link: "/addTest",
-    },
-    {
-      name: "Выйти",
-      onClickPopup() {
-        if (window.confirm("Вы действительно хотите выйти?")) {
-          logout();
-          window.localStorage.removeItem("token");
-        }
-      },
-    },
-  ];
+  const userSettings: PopupItems[] =
+    role === "admin"
+      ? [
+          {
+            name: "Профиль",
+            link: `/user/${_id}`,
+          },
+
+          {
+            name: "Добавить тест",
+            link: "/addTest",
+          },
+          {
+            name: "Выйти",
+            onClickPopup() {
+              if (window.confirm("Вы действительно хотите выйти?")) {
+                logout();
+                window.localStorage.removeItem("token");
+              }
+            },
+          },
+        ]
+      : [
+          {
+            name: "Профиль",
+            link: `/user/${_id}`,
+          },
+
+          {
+            name: "Выйти",
+            onClickPopup() {
+              if (window.confirm("Вы действительно хотите выйти?")) {
+                logout();
+                window.localStorage.removeItem("token");
+              }
+            },
+          },
+        ];
 
   const onToggleState = () => setUserState(false);
 

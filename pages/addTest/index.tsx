@@ -43,12 +43,20 @@ const AddTest = () => {
   };
 
   useEffect(() => {
-    if (!user) {
-      router.push("/");
-    }
+    let checkUser = setTimeout(() => {
+      if (!user) {
+        router.push("/");
+      } else if (user.role === "user") {
+        router.push("/");
+      }
+    }, 1500);
 
     clearState();
-  }, []);
+
+    return () => {
+      clearTimeout(checkUser);
+    };
+  }, [user]);
 
   return (
     <>

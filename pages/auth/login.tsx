@@ -14,12 +14,10 @@ const Login = () => {
 
   const { fetchAuth, data } = useAuthStore();
 
-  const isAuth = Boolean(data);
-
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      email: "test@massl.ru",
-      password: "123123",
+      email: "",
+      password: "",
     },
     mode: "onChange",
   });
